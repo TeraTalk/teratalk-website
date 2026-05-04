@@ -1,1312 +1,2061 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TeraTalk — AI Speech Therapy for Children</title>
+    <meta
+      name="description"
+      content="An intelligent speech therapy platform using pronunciation analysis, interactive games, and therapist insights to help children speak better."
+    />
+    <meta name="author" content="TeraTalk Research Team" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TeraTalk — AI Speech Therapy for Children</title>
-  <meta name="description"
-    content="An intelligent speech therapy platform using pronunciation analysis, interactive games, and therapist insights to help children speak better.">
-  <meta name="author" content="TeraTalk Research Team">
+    <meta
+      property="og:title"
+      content="TeraTalk — AI Speech Therapy for Children"
+    />
+    <meta
+      property="og:description"
+      content="An intelligent speech therapy platform using pronunciation analysis, interactive games, and therapist insights to help children speak better."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="TeraTalk" />
+    <meta
+      property="og:url"
+      content="https://teratalk.github.io/teratalk-website/"
+    />
+    <meta
+      property="og:image"
+      content="https://teratalk.github.io/teratalk-website/assets/logo.png"
+    />
+    <meta property="og:image:alt" content="TeraTalk logo" />
+    <meta property="og:locale" content="en_LK" />
 
-  <meta property="og:title" content="TeraTalk — AI Speech Therapy for Children">
-  <meta property="og:description"
-    content="An intelligent speech therapy platform using pronunciation analysis, interactive games, and therapist insights to help children speak better.">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="TeraTalk">
-  <meta property="og:url" content="https://teratalk.github.io/teratalk-website/">
-  <meta property="og:image" content="https://teratalk.github.io/teratalk-website/assets/logo.png">
-  <meta property="og:image:alt" content="TeraTalk logo">
-  <meta property="og:locale" content="en_LK">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="TeraTalk — AI Speech Therapy for Children"
+    />
+    <meta
+      name="twitter:description"
+      content="An intelligent speech therapy platform using pronunciation analysis, interactive games, and therapist insights to help children speak better."
+    />
+    <meta
+      name="twitter:image"
+      content="https://teratalk.github.io/teratalk-website/assets/logo.png"
+    />
+    <meta name="twitter:image:alt" content="TeraTalk logo" />
 
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="TeraTalk — AI Speech Therapy for Children">
-  <meta name="twitter:description"
-    content="An intelligent speech therapy platform using pronunciation analysis, interactive games, and therapist insights to help children speak better.">
-  <meta name="twitter:image" content="https://teratalk.github.io/teratalk-website/assets/logo.png">
-  <meta name="twitter:image:alt" content="TeraTalk logo">
-
-  <link rel="canonical" href="https://teratalk.github.io/teratalk-website/">
-  <link rel="icon" type="image/png" href="assets/logo.png">
-  <link rel="stylesheet" href="style.css">
-  <style type="text/css">
-    :where(html[dir="ltr"]),
-    :where([data-sonner-toaster][dir="ltr"]) {
-      --toast-icon-margin-start: -3px;
-      --toast-icon-margin-end: 4px;
-      --toast-svg-margin-start: -1px;
-      --toast-svg-margin-end: 0px;
-      --toast-button-margin-start: auto;
-      --toast-button-margin-end: 0;
-      --toast-close-button-start: 0;
-      --toast-close-button-end: unset;
-      --toast-close-button-transform: translate(-35%, -35%)
-    }
-
-    :where(html[dir="rtl"]),
-    :where([data-sonner-toaster][dir="rtl"]) {
-      --toast-icon-margin-start: 4px;
-      --toast-icon-margin-end: -3px;
-      --toast-svg-margin-start: 0px;
-      --toast-svg-margin-end: -1px;
-      --toast-button-margin-start: 0;
-      --toast-button-margin-end: auto;
-      --toast-close-button-start: unset;
-      --toast-close-button-end: 0;
-      --toast-close-button-transform: translate(35%, -35%)
-    }
-
-    :where([data-sonner-toaster]) {
-      position: fixed;
-      width: var(--width);
-      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-      --gray1: hsl(0, 0%, 99%);
-      --gray2: hsl(0, 0%, 97.3%);
-      --gray3: hsl(0, 0%, 95.1%);
-      --gray4: hsl(0, 0%, 93%);
-      --gray5: hsl(0, 0%, 90.9%);
-      --gray6: hsl(0, 0%, 88.7%);
-      --gray7: hsl(0, 0%, 85.8%);
-      --gray8: hsl(0, 0%, 78%);
-      --gray9: hsl(0, 0%, 56.1%);
-      --gray10: hsl(0, 0%, 52.3%);
-      --gray11: hsl(0, 0%, 43.5%);
-      --gray12: hsl(0, 0%, 9%);
-      --border-radius: 8px;
-      box-sizing: border-box;
-      padding: 0;
-      margin: 0;
-      list-style: none;
-      outline: none;
-      z-index: 999999999;
-      transition: transform .4s ease
-    }
-
-    :where([data-sonner-toaster][data-lifted="true"]) {
-      transform: translateY(-10px)
-    }
-
-    @media (hover: none) and (pointer: coarse) {
-      :where([data-sonner-toaster][data-lifted="true"]) {
-        transform: none
-      }
-    }
-
-    :where([data-sonner-toaster][data-x-position="right"]) {
-      right: var(--offset-right)
-    }
-
-    :where([data-sonner-toaster][data-x-position="left"]) {
-      left: var(--offset-left)
-    }
-
-    :where([data-sonner-toaster][data-x-position="center"]) {
-      left: 50%;
-      transform: translate(-50%)
-    }
-
-    :where([data-sonner-toaster][data-y-position="top"]) {
-      top: var(--offset-top)
-    }
-
-    :where([data-sonner-toaster][data-y-position="bottom"]) {
-      bottom: var(--offset-bottom)
-    }
-
-    :where([data-sonner-toast]) {
-      --y: translateY(100%);
-      --lift-amount: calc(var(--lift) * var(--gap));
-      z-index: var(--z-index);
-      position: absolute;
-      opacity: 0;
-      transform: var(--y);
-      filter: blur(0);
-      touch-action: none;
-      transition: transform .4s, opacity .4s, height .4s, box-shadow .2s;
-      box-sizing: border-box;
-      outline: none;
-      overflow-wrap: anywhere
-    }
-
-    :where([data-sonner-toast][data-styled="true"]) {
-      padding: 16px;
-      background: var(--normal-bg);
-      border: 1px solid var(--normal-border);
-      color: var(--normal-text);
-      border-radius: var(--border-radius);
-      box-shadow: 0 4px 12px #0000001a;
-      width: var(--width);
-      font-size: 13px;
-      display: flex;
-      align-items: center;
-      gap: 6px
-    }
-
-    :where([data-sonner-toast]:focus-visible) {
-      box-shadow: 0 4px 12px #0000001a, 0 0 0 2px #0003
-    }
-
-    :where([data-sonner-toast][data-y-position="top"]) {
-      top: 0;
-      --y: translateY(-100%);
-      --lift: 1;
-      --lift-amount: calc(1 * var(--gap))
-    }
-
-    :where([data-sonner-toast][data-y-position="bottom"]) {
-      bottom: 0;
-      --y: translateY(100%);
-      --lift: -1;
-      --lift-amount: calc(var(--lift) * var(--gap))
-    }
-
-    :where([data-sonner-toast]) :where([data-description]) {
-      font-weight: 400;
-      line-height: 1.4;
-      color: inherit
-    }
-
-    :where([data-sonner-toast]) :where([data-title]) {
-      font-weight: 500;
-      line-height: 1.5;
-      color: inherit
-    }
-
-    :where([data-sonner-toast]) :where([data-icon]) {
-      display: flex;
-      height: 16px;
-      width: 16px;
-      position: relative;
-      justify-content: flex-start;
-      align-items: center;
-      flex-shrink: 0;
-      margin-left: var(--toast-icon-margin-start);
-      margin-right: var(--toast-icon-margin-end)
-    }
-
-    :where([data-sonner-toast][data-promise="true"]) :where([data-icon])>svg {
-      opacity: 0;
-      transform: scale(.8);
-      transform-origin: center;
-      animation: sonner-fade-in .3s ease forwards
-    }
-
-    :where([data-sonner-toast]) :where([data-icon])>* {
-      flex-shrink: 0
-    }
-
-    :where([data-sonner-toast]) :where([data-icon]) svg {
-      margin-left: var(--toast-svg-margin-start);
-      margin-right: var(--toast-svg-margin-end)
-    }
-
-    :where([data-sonner-toast]) :where([data-content]) {
-      display: flex;
-      flex-direction: column;
-      gap: 2px
-    }
-
-    [data-sonner-toast][data-styled=true] [data-button] {
-      border-radius: 4px;
-      padding-left: 8px;
-      padding-right: 8px;
-      height: 24px;
-      font-size: 12px;
-      color: var(--normal-bg);
-      background: var(--normal-text);
-      margin-left: var(--toast-button-margin-start);
-      margin-right: var(--toast-button-margin-end);
-      border: none;
-      cursor: pointer;
-      outline: none;
-      display: flex;
-      align-items: center;
-      flex-shrink: 0;
-      transition: opacity .4s, box-shadow .2s
-    }
-
-    :where([data-sonner-toast]) :where([data-button]):focus-visible {
-      box-shadow: 0 0 0 2px #0006
-    }
-
-    :where([data-sonner-toast]) :where([data-button]):first-of-type {
-      margin-left: var(--toast-button-margin-start);
-      margin-right: var(--toast-button-margin-end)
-    }
-
-    :where([data-sonner-toast]) :where([data-cancel]) {
-      color: var(--normal-text);
-      background: rgba(0, 0, 0, .08)
-    }
-
-    :where([data-sonner-toast][data-theme="dark"]) :where([data-cancel]) {
-      background: rgba(255, 255, 255, .3)
-    }
-
-    :where([data-sonner-toast]) :where([data-close-button]) {
-      position: absolute;
-      left: var(--toast-close-button-start);
-      right: var(--toast-close-button-end);
-      top: 0;
-      height: 20px;
-      width: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0;
-      color: var(--gray12);
-      border: 1px solid var(--gray4);
-      transform: var(--toast-close-button-transform);
-      border-radius: 50%;
-      cursor: pointer;
-      z-index: 1;
-      transition: opacity .1s, background .2s, border-color .2s
-    }
-
-    [data-sonner-toast] [data-close-button] {
-      background: var(--gray1)
-    }
-
-    :where([data-sonner-toast]) :where([data-close-button]):focus-visible {
-      box-shadow: 0 4px 12px #0000001a, 0 0 0 2px #0003
-    }
-
-    :where([data-sonner-toast]) :where([data-disabled="true"]) {
-      cursor: not-allowed
-    }
-
-    :where([data-sonner-toast]):hover :where([data-close-button]):hover {
-      background: var(--gray2);
-      border-color: var(--gray5)
-    }
-
-    :where([data-sonner-toast][data-swiping="true"]):before {
-      content: "";
-      position: absolute;
-      left: -50%;
-      right: -50%;
-      height: 100%;
-      z-index: -1
-    }
-
-    :where([data-sonner-toast][data-y-position="top"][data-swiping="true"]):before {
-      bottom: 50%;
-      transform: scaleY(3) translateY(50%)
-    }
-
-    :where([data-sonner-toast][data-y-position="bottom"][data-swiping="true"]):before {
-      top: 50%;
-      transform: scaleY(3) translateY(-50%)
-    }
-
-    :where([data-sonner-toast][data-swiping="false"][data-removed="true"]):before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      transform: scaleY(2)
-    }
-
-    :where([data-sonner-toast]):after {
-      content: "";
-      position: absolute;
-      left: 0;
-      height: calc(var(--gap) + 1px);
-      bottom: 100%;
-      width: 100%
-    }
-
-    :where([data-sonner-toast][data-mounted="true"]) {
-      --y: translateY(0);
-      opacity: 1
-    }
-
-    :where([data-sonner-toast][data-expanded="false"][data-front="false"]) {
-      --scale: var(--toasts-before) * .05 + 1;
-      --y: translateY(calc(var(--lift-amount) * var(--toasts-before))) scale(calc(-1 * var(--scale)));
-      height: var(--front-toast-height)
-    }
-
-    :where([data-sonner-toast])>* {
-      transition: opacity .4s
-    }
-
-    :where([data-sonner-toast][data-expanded="false"][data-front="false"][data-styled="true"])>* {
-      opacity: 0
-    }
-
-    :where([data-sonner-toast][data-visible="false"]) {
-      opacity: 0;
-      pointer-events: none
-    }
-
-    :where([data-sonner-toast][data-mounted="true"][data-expanded="true"]) {
-      --y: translateY(calc(var(--lift) * var(--offset)));
-      height: var(--initial-height)
-    }
-
-    :where([data-sonner-toast][data-removed="true"][data-front="true"][data-swipe-out="false"]) {
-      --y: translateY(calc(var(--lift) * -100%));
-      opacity: 0
-    }
-
-    :where([data-sonner-toast][data-removed="true"][data-front="false"][data-swipe-out="false"][data-expanded="true"]) {
-      --y: translateY(calc(var(--lift) * var(--offset) + var(--lift) * -100%));
-      opacity: 0
-    }
-
-    :where([data-sonner-toast][data-removed="true"][data-front="false"][data-swipe-out="false"][data-expanded="false"]) {
-      --y: translateY(40%);
-      opacity: 0;
-      transition: transform .5s, opacity .2s
-    }
-
-    :where([data-sonner-toast][data-removed="true"][data-front="false"]):before {
-      height: calc(var(--initial-height) + 20%)
-    }
-
-    [data-sonner-toast][data-swiping=true] {
-      transform: var(--y) translateY(var(--swipe-amount-y, 0px)) translate(var(--swipe-amount-x, 0px));
-      transition: none
-    }
-
-    [data-sonner-toast][data-swiped=true] {
-      user-select: none
-    }
-
-    [data-sonner-toast][data-swipe-out=true][data-y-position=bottom],
-    [data-sonner-toast][data-swipe-out=true][data-y-position=top] {
-      animation-duration: .2s;
-      animation-timing-function: ease-out;
-      animation-fill-mode: forwards
-    }
-
-    [data-sonner-toast][data-swipe-out=true][data-swipe-direction=left] {
-      animation-name: swipe-out-left
-    }
-
-    [data-sonner-toast][data-swipe-out=true][data-swipe-direction=right] {
-      animation-name: swipe-out-right
-    }
-
-    [data-sonner-toast][data-swipe-out=true][data-swipe-direction=up] {
-      animation-name: swipe-out-up
-    }
-
-    [data-sonner-toast][data-swipe-out=true][data-swipe-direction=down] {
-      animation-name: swipe-out-down
-    }
-
-    @keyframes swipe-out-left {
-      0% {
-        transform: var(--y) translate(var(--swipe-amount-x));
-        opacity: 1
+    <link rel="canonical" href="https://teratalk.github.io/teratalk-website/" />
+    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <link rel="stylesheet" href="style.css" />
+    <style type="text/css">
+      :where(html[dir="ltr"]),
+      :where([data-sonner-toaster][dir="ltr"]) {
+        --toast-icon-margin-start: -3px;
+        --toast-icon-margin-end: 4px;
+        --toast-svg-margin-start: -1px;
+        --toast-svg-margin-end: 0px;
+        --toast-button-margin-start: auto;
+        --toast-button-margin-end: 0;
+        --toast-close-button-start: 0;
+        --toast-close-button-end: unset;
+        --toast-close-button-transform: translate(-35%, -35%);
       }
 
-      to {
-        transform: var(--y) translate(calc(var(--swipe-amount-x) - 100%));
-        opacity: 0
-      }
-    }
-
-    @keyframes swipe-out-right {
-      0% {
-        transform: var(--y) translate(var(--swipe-amount-x));
-        opacity: 1
-      }
-
-      to {
-        transform: var(--y) translate(calc(var(--swipe-amount-x) + 100%));
-        opacity: 0
-      }
-    }
-
-    @keyframes swipe-out-up {
-      0% {
-        transform: var(--y) translateY(var(--swipe-amount-y));
-        opacity: 1
+      :where(html[dir="rtl"]),
+      :where([data-sonner-toaster][dir="rtl"]) {
+        --toast-icon-margin-start: 4px;
+        --toast-icon-margin-end: -3px;
+        --toast-svg-margin-start: 0px;
+        --toast-svg-margin-end: -1px;
+        --toast-button-margin-start: 0;
+        --toast-button-margin-end: auto;
+        --toast-close-button-start: unset;
+        --toast-close-button-end: 0;
+        --toast-close-button-transform: translate(35%, -35%);
       }
 
-      to {
-        transform: var(--y) translateY(calc(var(--swipe-amount-y) - 100%));
-        opacity: 0
-      }
-    }
-
-    @keyframes swipe-out-down {
-      0% {
-        transform: var(--y) translateY(var(--swipe-amount-y));
-        opacity: 1
-      }
-
-      to {
-        transform: var(--y) translateY(calc(var(--swipe-amount-y) + 100%));
-        opacity: 0
-      }
-    }
-
-    @media (max-width: 600px) {
-      [data-sonner-toaster] {
+      :where([data-sonner-toaster]) {
         position: fixed;
-        right: var(--mobile-offset-right);
-        left: var(--mobile-offset-left);
-        width: 100%
+        width: var(--width);
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          Segoe UI,
+          Roboto,
+          Helvetica Neue,
+          Arial,
+          Noto Sans,
+          sans-serif,
+          Apple Color Emoji,
+          Segoe UI Emoji,
+          Segoe UI Symbol,
+          Noto Color Emoji;
+        --gray1: hsl(0, 0%, 99%);
+        --gray2: hsl(0, 0%, 97.3%);
+        --gray3: hsl(0, 0%, 95.1%);
+        --gray4: hsl(0, 0%, 93%);
+        --gray5: hsl(0, 0%, 90.9%);
+        --gray6: hsl(0, 0%, 88.7%);
+        --gray7: hsl(0, 0%, 85.8%);
+        --gray8: hsl(0, 0%, 78%);
+        --gray9: hsl(0, 0%, 56.1%);
+        --gray10: hsl(0, 0%, 52.3%);
+        --gray11: hsl(0, 0%, 43.5%);
+        --gray12: hsl(0, 0%, 9%);
+        --border-radius: 8px;
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        outline: none;
+        z-index: 999999999;
+        transition: transform 0.4s ease;
       }
 
-      [data-sonner-toaster][dir=rtl] {
-        left: calc(var(--mobile-offset-left) * -1)
+      :where([data-sonner-toaster][data-lifted="true"]) {
+        transform: translateY(-10px);
       }
 
-      [data-sonner-toaster] [data-sonner-toast] {
+      @media (hover: none) and (pointer: coarse) {
+        :where([data-sonner-toaster][data-lifted="true"]) {
+          transform: none;
+        }
+      }
+
+      :where([data-sonner-toaster][data-x-position="right"]) {
+        right: var(--offset-right);
+      }
+
+      :where([data-sonner-toaster][data-x-position="left"]) {
+        left: var(--offset-left);
+      }
+
+      :where([data-sonner-toaster][data-x-position="center"]) {
+        left: 50%;
+        transform: translate(-50%);
+      }
+
+      :where([data-sonner-toaster][data-y-position="top"]) {
+        top: var(--offset-top);
+      }
+
+      :where([data-sonner-toaster][data-y-position="bottom"]) {
+        bottom: var(--offset-bottom);
+      }
+
+      :where([data-sonner-toast]) {
+        --y: translateY(100%);
+        --lift-amount: calc(var(--lift) * var(--gap));
+        z-index: var(--z-index);
+        position: absolute;
+        opacity: 0;
+        transform: var(--y);
+        filter: blur(0);
+        touch-action: none;
+        transition:
+          transform 0.4s,
+          opacity 0.4s,
+          height 0.4s,
+          box-shadow 0.2s;
+        box-sizing: border-box;
+        outline: none;
+        overflow-wrap: anywhere;
+      }
+
+      :where([data-sonner-toast][data-styled="true"]) {
+        padding: 16px;
+        background: var(--normal-bg);
+        border: 1px solid var(--normal-border);
+        color: var(--normal-text);
+        border-radius: var(--border-radius);
+        box-shadow: 0 4px 12px #0000001a;
+        width: var(--width);
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      :where([data-sonner-toast]:focus-visible) {
+        box-shadow:
+          0 4px 12px #0000001a,
+          0 0 0 2px #0003;
+      }
+
+      :where([data-sonner-toast][data-y-position="top"]) {
+        top: 0;
+        --y: translateY(-100%);
+        --lift: 1;
+        --lift-amount: calc(1 * var(--gap));
+      }
+
+      :where([data-sonner-toast][data-y-position="bottom"]) {
+        bottom: 0;
+        --y: translateY(100%);
+        --lift: -1;
+        --lift-amount: calc(var(--lift) * var(--gap));
+      }
+
+      :where([data-sonner-toast]) :where([data-description]) {
+        font-weight: 400;
+        line-height: 1.4;
+        color: inherit;
+      }
+
+      :where([data-sonner-toast]) :where([data-title]) {
+        font-weight: 500;
+        line-height: 1.5;
+        color: inherit;
+      }
+
+      :where([data-sonner-toast]) :where([data-icon]) {
+        display: flex;
+        height: 16px;
+        width: 16px;
+        position: relative;
+        justify-content: flex-start;
+        align-items: center;
+        flex-shrink: 0;
+        margin-left: var(--toast-icon-margin-start);
+        margin-right: var(--toast-icon-margin-end);
+      }
+
+      :where([data-sonner-toast][data-promise="true"])
+        :where([data-icon])
+        > svg {
+        opacity: 0;
+        transform: scale(0.8);
+        transform-origin: center;
+        animation: sonner-fade-in 0.3s ease forwards;
+      }
+
+      :where([data-sonner-toast]) :where([data-icon]) > * {
+        flex-shrink: 0;
+      }
+
+      :where([data-sonner-toast]) :where([data-icon]) svg {
+        margin-left: var(--toast-svg-margin-start);
+        margin-right: var(--toast-svg-margin-end);
+      }
+
+      :where([data-sonner-toast]) :where([data-content]) {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      [data-sonner-toast][data-styled="true"] [data-button] {
+        border-radius: 4px;
+        padding-left: 8px;
+        padding-right: 8px;
+        height: 24px;
+        font-size: 12px;
+        color: var(--normal-bg);
+        background: var(--normal-text);
+        margin-left: var(--toast-button-margin-start);
+        margin-right: var(--toast-button-margin-end);
+        border: none;
+        cursor: pointer;
+        outline: none;
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+        transition:
+          opacity 0.4s,
+          box-shadow 0.2s;
+      }
+
+      :where([data-sonner-toast]) :where([data-button]):focus-visible {
+        box-shadow: 0 0 0 2px #0006;
+      }
+
+      :where([data-sonner-toast]) :where([data-button]):first-of-type {
+        margin-left: var(--toast-button-margin-start);
+        margin-right: var(--toast-button-margin-end);
+      }
+
+      :where([data-sonner-toast]) :where([data-cancel]) {
+        color: var(--normal-text);
+        background: rgba(0, 0, 0, 0.08);
+      }
+
+      :where([data-sonner-toast][data-theme="dark"]) :where([data-cancel]) {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      :where([data-sonner-toast]) :where([data-close-button]) {
+        position: absolute;
+        left: var(--toast-close-button-start);
+        right: var(--toast-close-button-end);
+        top: 0;
+        height: 20px;
+        width: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        color: var(--gray12);
+        border: 1px solid var(--gray4);
+        transform: var(--toast-close-button-transform);
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 1;
+        transition:
+          opacity 0.1s,
+          background 0.2s,
+          border-color 0.2s;
+      }
+
+      [data-sonner-toast] [data-close-button] {
+        background: var(--gray1);
+      }
+
+      :where([data-sonner-toast]) :where([data-close-button]):focus-visible {
+        box-shadow:
+          0 4px 12px #0000001a,
+          0 0 0 2px #0003;
+      }
+
+      :where([data-sonner-toast]) :where([data-disabled="true"]) {
+        cursor: not-allowed;
+      }
+
+      :where([data-sonner-toast]):hover :where([data-close-button]):hover {
+        background: var(--gray2);
+        border-color: var(--gray5);
+      }
+
+      :where([data-sonner-toast][data-swiping="true"]):before {
+        content: "";
+        position: absolute;
+        left: -50%;
+        right: -50%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      :where(
+        [data-sonner-toast][data-y-position="top"][data-swiping="true"]
+      ):before {
+        bottom: 50%;
+        transform: scaleY(3) translateY(50%);
+      }
+
+      :where(
+        [data-sonner-toast][data-y-position="bottom"][data-swiping="true"]
+      ):before {
+        top: 50%;
+        transform: scaleY(3) translateY(-50%);
+      }
+
+      :where(
+        [data-sonner-toast][data-swiping="false"][data-removed="true"]
+      ):before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        transform: scaleY(2);
+      }
+
+      :where([data-sonner-toast]):after {
+        content: "";
+        position: absolute;
         left: 0;
-        right: 0;
-        width: calc(100% - var(--mobile-offset-left) * 2)
+        height: calc(var(--gap) + 1px);
+        bottom: 100%;
+        width: 100%;
       }
 
-      [data-sonner-toaster][data-x-position=left] {
-        left: var(--mobile-offset-left)
-      }
-
-      [data-sonner-toaster][data-y-position=bottom] {
-        bottom: var(--mobile-offset-bottom)
-      }
-
-      [data-sonner-toaster][data-y-position=top] {
-        top: var(--mobile-offset-top)
-      }
-
-      [data-sonner-toaster][data-x-position=center] {
-        left: var(--mobile-offset-left);
-        right: var(--mobile-offset-right);
-        transform: none
-      }
-    }
-
-    [data-sonner-toaster][data-theme=light] {
-      --normal-bg: #fff;
-      --normal-border: var(--gray4);
-      --normal-text: var(--gray12);
-      --success-bg: hsl(143, 85%, 96%);
-      --success-border: hsl(145, 92%, 91%);
-      --success-text: hsl(140, 100%, 27%);
-      --info-bg: hsl(208, 100%, 97%);
-      --info-border: hsl(221, 91%, 91%);
-      --info-text: hsl(210, 92%, 45%);
-      --warning-bg: hsl(49, 100%, 97%);
-      --warning-border: hsl(49, 91%, 91%);
-      --warning-text: hsl(31, 92%, 45%);
-      --error-bg: hsl(359, 100%, 97%);
-      --error-border: hsl(359, 100%, 94%);
-      --error-text: hsl(360, 100%, 45%)
-    }
-
-    [data-sonner-toaster][data-theme=light] [data-sonner-toast][data-invert=true] {
-      --normal-bg: #000;
-      --normal-border: hsl(0, 0%, 20%);
-      --normal-text: var(--gray1)
-    }
-
-    [data-sonner-toaster][data-theme=dark] [data-sonner-toast][data-invert=true] {
-      --normal-bg: #fff;
-      --normal-border: var(--gray3);
-      --normal-text: var(--gray12)
-    }
-
-    [data-sonner-toaster][data-theme=dark] {
-      --normal-bg: #000;
-      --normal-bg-hover: hsl(0, 0%, 12%);
-      --normal-border: hsl(0, 0%, 20%);
-      --normal-border-hover: hsl(0, 0%, 25%);
-      --normal-text: var(--gray1);
-      --success-bg: hsl(150, 100%, 6%);
-      --success-border: hsl(147, 100%, 12%);
-      --success-text: hsl(150, 86%, 65%);
-      --info-bg: hsl(215, 100%, 6%);
-      --info-border: hsl(223, 100%, 12%);
-      --info-text: hsl(216, 87%, 65%);
-      --warning-bg: hsl(64, 100%, 6%);
-      --warning-border: hsl(60, 100%, 12%);
-      --warning-text: hsl(46, 87%, 65%);
-      --error-bg: hsl(358, 76%, 10%);
-      --error-border: hsl(357, 89%, 16%);
-      --error-text: hsl(358, 100%, 81%)
-    }
-
-    [data-sonner-toaster][data-theme=dark] [data-sonner-toast] [data-close-button] {
-      background: var(--normal-bg);
-      border-color: var(--normal-border);
-      color: var(--normal-text)
-    }
-
-    [data-sonner-toaster][data-theme=dark] [data-sonner-toast] [data-close-button]:hover {
-      background: var(--normal-bg-hover);
-      border-color: var(--normal-border-hover)
-    }
-
-    [data-rich-colors=true][data-sonner-toast][data-type=success],
-    [data-rich-colors=true][data-sonner-toast][data-type=success] [data-close-button] {
-      background: var(--success-bg);
-      border-color: var(--success-border);
-      color: var(--success-text)
-    }
-
-    [data-rich-colors=true][data-sonner-toast][data-type=info],
-    [data-rich-colors=true][data-sonner-toast][data-type=info] [data-close-button] {
-      background: var(--info-bg);
-      border-color: var(--info-border);
-      color: var(--info-text)
-    }
-
-    [data-rich-colors=true][data-sonner-toast][data-type=warning],
-    [data-rich-colors=true][data-sonner-toast][data-type=warning] [data-close-button] {
-      background: var(--warning-bg);
-      border-color: var(--warning-border);
-      color: var(--warning-text)
-    }
-
-    [data-rich-colors=true][data-sonner-toast][data-type=error],
-    [data-rich-colors=true][data-sonner-toast][data-type=error] [data-close-button] {
-      background: var(--error-bg);
-      border-color: var(--error-border);
-      color: var(--error-text)
-    }
-
-    .sonner-loading-wrapper {
-      --size: 16px;
-      height: var(--size);
-      width: var(--size);
-      position: absolute;
-      inset: 0;
-      z-index: 10
-    }
-
-    .sonner-loading-wrapper[data-visible=false] {
-      transform-origin: center;
-      animation: sonner-fade-out .2s ease forwards
-    }
-
-    .sonner-spinner {
-      position: relative;
-      top: 50%;
-      left: 50%;
-      height: var(--size);
-      width: var(--size)
-    }
-
-    .sonner-loading-bar {
-      animation: sonner-spin 1.2s linear infinite;
-      background: var(--gray11);
-      border-radius: 6px;
-      height: 8%;
-      left: -10%;
-      position: absolute;
-      top: -3.9%;
-      width: 24%
-    }
-
-    .sonner-loading-bar:nth-child(1) {
-      animation-delay: -1.2s;
-      transform: rotate(.0001deg) translate(146%)
-    }
-
-    .sonner-loading-bar:nth-child(2) {
-      animation-delay: -1.1s;
-      transform: rotate(30deg) translate(146%)
-    }
-
-    .sonner-loading-bar:nth-child(3) {
-      animation-delay: -1s;
-      transform: rotate(60deg) translate(146%)
-    }
-
-    .sonner-loading-bar:nth-child(4) {
-      animation-delay: -.9s;
-      transform: rotate(90deg) translate(146%)
-    }
-
-    .sonner-loading-bar:nth-child(5) {
-      animation-delay: -.8s;
-      transform: rotate(120deg) translate(146%)
-    }
-
-    .sonner-loading-bar:nth-child(6) {
-      animation-delay: -.7s;
-      transform: rotate(150deg) translate(146%)
-    }
-
-    .sonner-loading-bar:nth-child(7) {
-      animation-delay: -.6s;
-      transform: rotate(180deg) translate(146%)
-    }
-
-    .sonner-loading-bar:nth-child(8) {
-      animation-delay: -.5s;
-      transform: rotate(210deg) translate(146%)
-    }
-
-    .sonner-loading-bar:nth-child(9) {
-      animation-delay: -.4s;
-      transform: rotate(240deg) translate(146%)
-    }
-
-    .sonner-loading-bar:nth-child(10) {
-      animation-delay: -.3s;
-      transform: rotate(270deg) translate(146%)
-    }
-
-    .sonner-loading-bar:nth-child(11) {
-      animation-delay: -.2s;
-      transform: rotate(300deg) translate(146%)
-    }
-
-    .sonner-loading-bar:nth-child(12) {
-      animation-delay: -.1s;
-      transform: rotate(330deg) translate(146%)
-    }
-
-    @keyframes sonner-fade-in {
-      0% {
-        opacity: 0;
-        transform: scale(.8)
-      }
-
-      to {
+      :where([data-sonner-toast][data-mounted="true"]) {
+        --y: translateY(0);
         opacity: 1;
-        transform: scale(1)
-      }
-    }
-
-    @keyframes sonner-fade-out {
-      0% {
-        opacity: 1;
-        transform: scale(1)
       }
 
-      to {
+      :where([data-sonner-toast][data-expanded="false"][data-front="false"]) {
+        --scale: var(--toasts-before) * 0.05 + 1;
+        --y: translateY(calc(var(--lift-amount) * var(--toasts-before)))
+          scale(calc(-1 * var(--scale)));
+        height: var(--front-toast-height);
+      }
+
+      :where([data-sonner-toast]) > * {
+        transition: opacity 0.4s;
+      }
+
+      :where(
+          [data-sonner-toast][data-expanded="false"][data-front="false"][data-styled="true"]
+        )
+        > * {
         opacity: 0;
-        transform: scale(.8)
-      }
-    }
-
-    @keyframes sonner-spin {
-      0% {
-        opacity: 1
       }
 
-      to {
-        opacity: .15
+      :where([data-sonner-toast][data-visible="false"]) {
+        opacity: 0;
+        pointer-events: none;
       }
-    }
 
-    @media (prefers-reduced-motion) {
+      :where([data-sonner-toast][data-mounted="true"][data-expanded="true"]) {
+        --y: translateY(calc(var(--lift) * var(--offset)));
+        height: var(--initial-height);
+      }
 
-      [data-sonner-toast],
-      [data-sonner-toast]>*,
+      :where(
+        [data-sonner-toast][data-removed="true"][data-front="true"][data-swipe-out="false"]
+      ) {
+        --y: translateY(calc(var(--lift) * -100%));
+        opacity: 0;
+      }
+
+      :where(
+        [data-sonner-toast][data-removed="true"][data-front="false"][data-swipe-out="false"][data-expanded="true"]
+      ) {
+        --y: translateY(
+          calc(var(--lift) * var(--offset) + var(--lift) * -100%)
+        );
+        opacity: 0;
+      }
+
+      :where(
+        [data-sonner-toast][data-removed="true"][data-front="false"][data-swipe-out="false"][data-expanded="false"]
+      ) {
+        --y: translateY(40%);
+        opacity: 0;
+        transition:
+          transform 0.5s,
+          opacity 0.2s;
+      }
+
+      :where(
+        [data-sonner-toast][data-removed="true"][data-front="false"]
+      ):before {
+        height: calc(var(--initial-height) + 20%);
+      }
+
+      [data-sonner-toast][data-swiping="true"] {
+        transform: var(--y) translateY(var(--swipe-amount-y, 0px))
+          translate(var(--swipe-amount-x, 0px));
+        transition: none;
+      }
+
+      [data-sonner-toast][data-swiped="true"] {
+        user-select: none;
+      }
+
+      [data-sonner-toast][data-swipe-out="true"][data-y-position="bottom"],
+      [data-sonner-toast][data-swipe-out="true"][data-y-position="top"] {
+        animation-duration: 0.2s;
+        animation-timing-function: ease-out;
+        animation-fill-mode: forwards;
+      }
+
+      [data-sonner-toast][data-swipe-out="true"][data-swipe-direction="left"] {
+        animation-name: swipe-out-left;
+      }
+
+      [data-sonner-toast][data-swipe-out="true"][data-swipe-direction="right"] {
+        animation-name: swipe-out-right;
+      }
+
+      [data-sonner-toast][data-swipe-out="true"][data-swipe-direction="up"] {
+        animation-name: swipe-out-up;
+      }
+
+      [data-sonner-toast][data-swipe-out="true"][data-swipe-direction="down"] {
+        animation-name: swipe-out-down;
+      }
+
+      @keyframes swipe-out-left {
+        0% {
+          transform: var(--y) translate(var(--swipe-amount-x));
+          opacity: 1;
+        }
+
+        to {
+          transform: var(--y) translate(calc(var(--swipe-amount-x) - 100%));
+          opacity: 0;
+        }
+      }
+
+      @keyframes swipe-out-right {
+        0% {
+          transform: var(--y) translate(var(--swipe-amount-x));
+          opacity: 1;
+        }
+
+        to {
+          transform: var(--y) translate(calc(var(--swipe-amount-x) + 100%));
+          opacity: 0;
+        }
+      }
+
+      @keyframes swipe-out-up {
+        0% {
+          transform: var(--y) translateY(var(--swipe-amount-y));
+          opacity: 1;
+        }
+
+        to {
+          transform: var(--y) translateY(calc(var(--swipe-amount-y) - 100%));
+          opacity: 0;
+        }
+      }
+
+      @keyframes swipe-out-down {
+        0% {
+          transform: var(--y) translateY(var(--swipe-amount-y));
+          opacity: 1;
+        }
+
+        to {
+          transform: var(--y) translateY(calc(var(--swipe-amount-y) + 100%));
+          opacity: 0;
+        }
+      }
+
+      @media (max-width: 600px) {
+        [data-sonner-toaster] {
+          position: fixed;
+          right: var(--mobile-offset-right);
+          left: var(--mobile-offset-left);
+          width: 100%;
+        }
+
+        [data-sonner-toaster][dir="rtl"] {
+          left: calc(var(--mobile-offset-left) * -1);
+        }
+
+        [data-sonner-toaster] [data-sonner-toast] {
+          left: 0;
+          right: 0;
+          width: calc(100% - var(--mobile-offset-left) * 2);
+        }
+
+        [data-sonner-toaster][data-x-position="left"] {
+          left: var(--mobile-offset-left);
+        }
+
+        [data-sonner-toaster][data-y-position="bottom"] {
+          bottom: var(--mobile-offset-bottom);
+        }
+
+        [data-sonner-toaster][data-y-position="top"] {
+          top: var(--mobile-offset-top);
+        }
+
+        [data-sonner-toaster][data-x-position="center"] {
+          left: var(--mobile-offset-left);
+          right: var(--mobile-offset-right);
+          transform: none;
+        }
+      }
+
+      [data-sonner-toaster][data-theme="light"] {
+        --normal-bg: #fff;
+        --normal-border: var(--gray4);
+        --normal-text: var(--gray12);
+        --success-bg: hsl(143, 85%, 96%);
+        --success-border: hsl(145, 92%, 91%);
+        --success-text: hsl(140, 100%, 27%);
+        --info-bg: hsl(208, 100%, 97%);
+        --info-border: hsl(221, 91%, 91%);
+        --info-text: hsl(210, 92%, 45%);
+        --warning-bg: hsl(49, 100%, 97%);
+        --warning-border: hsl(49, 91%, 91%);
+        --warning-text: hsl(31, 92%, 45%);
+        --error-bg: hsl(359, 100%, 97%);
+        --error-border: hsl(359, 100%, 94%);
+        --error-text: hsl(360, 100%, 45%);
+      }
+
+      [data-sonner-toaster][data-theme="light"]
+        [data-sonner-toast][data-invert="true"] {
+        --normal-bg: #000;
+        --normal-border: hsl(0, 0%, 20%);
+        --normal-text: var(--gray1);
+      }
+
+      [data-sonner-toaster][data-theme="dark"]
+        [data-sonner-toast][data-invert="true"] {
+        --normal-bg: #fff;
+        --normal-border: var(--gray3);
+        --normal-text: var(--gray12);
+      }
+
+      [data-sonner-toaster][data-theme="dark"] {
+        --normal-bg: #000;
+        --normal-bg-hover: hsl(0, 0%, 12%);
+        --normal-border: hsl(0, 0%, 20%);
+        --normal-border-hover: hsl(0, 0%, 25%);
+        --normal-text: var(--gray1);
+        --success-bg: hsl(150, 100%, 6%);
+        --success-border: hsl(147, 100%, 12%);
+        --success-text: hsl(150, 86%, 65%);
+        --info-bg: hsl(215, 100%, 6%);
+        --info-border: hsl(223, 100%, 12%);
+        --info-text: hsl(216, 87%, 65%);
+        --warning-bg: hsl(64, 100%, 6%);
+        --warning-border: hsl(60, 100%, 12%);
+        --warning-text: hsl(46, 87%, 65%);
+        --error-bg: hsl(358, 76%, 10%);
+        --error-border: hsl(357, 89%, 16%);
+        --error-text: hsl(358, 100%, 81%);
+      }
+
+      [data-sonner-toaster][data-theme="dark"]
+        [data-sonner-toast]
+        [data-close-button] {
+        background: var(--normal-bg);
+        border-color: var(--normal-border);
+        color: var(--normal-text);
+      }
+
+      [data-sonner-toaster][data-theme="dark"]
+        [data-sonner-toast]
+        [data-close-button]:hover {
+        background: var(--normal-bg-hover);
+        border-color: var(--normal-border-hover);
+      }
+
+      [data-rich-colors="true"][data-sonner-toast][data-type="success"],
+      [data-rich-colors="true"][data-sonner-toast][data-type="success"]
+        [data-close-button] {
+        background: var(--success-bg);
+        border-color: var(--success-border);
+        color: var(--success-text);
+      }
+
+      [data-rich-colors="true"][data-sonner-toast][data-type="info"],
+      [data-rich-colors="true"][data-sonner-toast][data-type="info"]
+        [data-close-button] {
+        background: var(--info-bg);
+        border-color: var(--info-border);
+        color: var(--info-text);
+      }
+
+      [data-rich-colors="true"][data-sonner-toast][data-type="warning"],
+      [data-rich-colors="true"][data-sonner-toast][data-type="warning"]
+        [data-close-button] {
+        background: var(--warning-bg);
+        border-color: var(--warning-border);
+        color: var(--warning-text);
+      }
+
+      [data-rich-colors="true"][data-sonner-toast][data-type="error"],
+      [data-rich-colors="true"][data-sonner-toast][data-type="error"]
+        [data-close-button] {
+        background: var(--error-bg);
+        border-color: var(--error-border);
+        color: var(--error-text);
+      }
+
+      .sonner-loading-wrapper {
+        --size: 16px;
+        height: var(--size);
+        width: var(--size);
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+      }
+
+      .sonner-loading-wrapper[data-visible="false"] {
+        transform-origin: center;
+        animation: sonner-fade-out 0.2s ease forwards;
+      }
+
+      .sonner-spinner {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        height: var(--size);
+        width: var(--size);
+      }
+
       .sonner-loading-bar {
-        transition: none !important;
-        animation: none !important
+        animation: sonner-spin 1.2s linear infinite;
+        background: var(--gray11);
+        border-radius: 6px;
+        height: 8%;
+        left: -10%;
+        position: absolute;
+        top: -3.9%;
+        width: 24%;
       }
-    }
 
-    .sonner-loader {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      transform-origin: center;
-      transition: opacity .2s, transform .2s
-    }
+      .sonner-loading-bar:nth-child(1) {
+        animation-delay: -1.2s;
+        transform: rotate(0.0001deg) translate(146%);
+      }
 
-    .sonner-loader[data-visible=false] {
-      opacity: 0;
-      transform: scale(.8) translate(-50%, -50%)
-    }
-  </style>
-</head>
+      .sonner-loading-bar:nth-child(2) {
+        animation-delay: -1.1s;
+        transform: rotate(30deg) translate(146%);
+      }
 
-<body>
-  <div id="root">
-    <div role="region" aria-label="Notifications (F8)" tabindex="-1" style="pointer-events: none;">
-      <ol tabindex="-1"
-        class="fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]">
-      </ol>
-    </div>
-    <section aria-label="Notifications alt+T" tabindex="-1" aria-live="polite" aria-relevant="additions text"
-      aria-atomic="false"></section>
-    <div class="min-h-screen flex flex-col">
-      <header class="fixed top-0 inset-x-0 z-50 transition-smooth bg-transparent">
-        <div class="container flex h-16 items-center justify-between"><a
-            class="flex items-center gap-2 font-display font-extrabold text-xl" href="index.html"><span class="grid place-items-center w-16 h-16 overflow-hidden"><img src="assets/logo.png" alt="TeraTalk Logo" class="w-full h-full object-contain" /></span><span class="text-gradient">TeraTalk</span></a>
-          <nav class="hidden lg:flex items-center gap-1"><a aria-current="page"
-              class="px-3 py-2 text-sm font-medium rounded-lg transition-smooth text-primary bg-primary/10"
-              href="index.html">Home</a><a
-              class="px-3 py-2 text-sm font-medium rounded-lg transition-smooth text-foreground/70 hover:text-primary hover:bg-primary/5"
-              href="domain.html">Domain</a><a
-              class="px-3 py-2 text-sm font-medium rounded-lg transition-smooth text-foreground/70 hover:text-primary hover:bg-primary/5"
-              href="milestones.html">Milestones</a><a
-              class="px-3 py-2 text-sm font-medium rounded-lg transition-smooth text-foreground/70 hover:text-primary hover:bg-primary/5"
-              href="documents.html">Documents</a><a
-              class="px-3 py-2 text-sm font-medium rounded-lg transition-smooth text-foreground/70 hover:text-primary hover:bg-primary/5"
-              href="presentations.html">Presentations</a>
-            <!-- <a
+      .sonner-loading-bar:nth-child(3) {
+        animation-delay: -1s;
+        transform: rotate(60deg) translate(146%);
+      }
+
+      .sonner-loading-bar:nth-child(4) {
+        animation-delay: -0.9s;
+        transform: rotate(90deg) translate(146%);
+      }
+
+      .sonner-loading-bar:nth-child(5) {
+        animation-delay: -0.8s;
+        transform: rotate(120deg) translate(146%);
+      }
+
+      .sonner-loading-bar:nth-child(6) {
+        animation-delay: -0.7s;
+        transform: rotate(150deg) translate(146%);
+      }
+
+      .sonner-loading-bar:nth-child(7) {
+        animation-delay: -0.6s;
+        transform: rotate(180deg) translate(146%);
+      }
+
+      .sonner-loading-bar:nth-child(8) {
+        animation-delay: -0.5s;
+        transform: rotate(210deg) translate(146%);
+      }
+
+      .sonner-loading-bar:nth-child(9) {
+        animation-delay: -0.4s;
+        transform: rotate(240deg) translate(146%);
+      }
+
+      .sonner-loading-bar:nth-child(10) {
+        animation-delay: -0.3s;
+        transform: rotate(270deg) translate(146%);
+      }
+
+      .sonner-loading-bar:nth-child(11) {
+        animation-delay: -0.2s;
+        transform: rotate(300deg) translate(146%);
+      }
+
+      .sonner-loading-bar:nth-child(12) {
+        animation-delay: -0.1s;
+        transform: rotate(330deg) translate(146%);
+      }
+
+      @keyframes sonner-fade-in {
+        0% {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes sonner-fade-out {
+        0% {
+          opacity: 1;
+          transform: scale(1);
+        }
+
+        to {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+      }
+
+      @keyframes sonner-spin {
+        0% {
+          opacity: 1;
+        }
+
+        to {
+          opacity: 0.15;
+        }
+      }
+
+      @media (prefers-reduced-motion) {
+        [data-sonner-toast],
+        [data-sonner-toast] > *,
+        .sonner-loading-bar {
+          transition: none !important;
+          animation: none !important;
+        }
+      }
+
+      .sonner-loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transform-origin: center;
+        transition:
+          opacity 0.2s,
+          transform 0.2s;
+      }
+
+      .sonner-loader[data-visible="false"] {
+        opacity: 0;
+        transform: scale(0.8) translate(-50%, -50%);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root">
+      <div
+        role="region"
+        aria-label="Notifications (F8)"
+        tabindex="-1"
+        style="pointer-events: none"
+      >
+        <ol
+          tabindex="-1"
+          class="fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]"
+        ></ol>
+      </div>
+      <section
+        aria-label="Notifications alt+T"
+        tabindex="-1"
+        aria-live="polite"
+        aria-relevant="additions text"
+        aria-atomic="false"
+      ></section>
+      <div class="min-h-screen flex flex-col">
+        <header
+          class="fixed top-0 inset-x-0 z-50 transition-smooth bg-transparent"
+        >
+          <div class="container flex h-16 items-center justify-between">
+            <a
+              class="flex items-center gap-2 font-display font-extrabold text-xl"
+              href="index.html"
+              ><span class="grid place-items-center w-16 h-16 overflow-hidden"
+                ><img
+                  src="assets/logo.png"
+                  alt="TeraTalk Logo"
+                  class="w-full h-full object-contain" /></span
+              ><span class="text-gradient">TeraTalk</span></a
+            >
+            <nav class="hidden lg:flex items-center gap-1">
+              <a
+                aria-current="page"
+                class="px-3 py-2 text-sm font-medium rounded-lg transition-smooth text-primary bg-primary/10"
+                href="index.html"
+                >Home</a
+              ><a
+                class="px-3 py-2 text-sm font-medium rounded-lg transition-smooth text-foreground/70 hover:text-primary hover:bg-primary/5"
+                href="domain.html"
+                >Domain</a
+              ><a
+                class="px-3 py-2 text-sm font-medium rounded-lg transition-smooth text-foreground/70 hover:text-primary hover:bg-primary/5"
+                href="milestones.html"
+                >Milestones</a
+              ><a
+                class="px-3 py-2 text-sm font-medium rounded-lg transition-smooth text-foreground/70 hover:text-primary hover:bg-primary/5"
+                href="documents.html"
+                >Documents</a
+              ><a
+                class="px-3 py-2 text-sm font-medium rounded-lg transition-smooth text-foreground/70 hover:text-primary hover:bg-primary/5"
+                href="presentations.html"
+                >Presentations</a
+              >
+              <!-- <a
               class="px-3 py-2 text-sm font-medium rounded-lg transition-smooth text-foreground/70 hover:text-primary hover:bg-primary/5"
               href="demo.html">Demo</a> -->
-            <!-- <a class="px-3 py-2 text-sm font-medium rounded-lg transition-smooth text-foreground/70 hover:text-primary hover:bg-primary/5"
+              <!-- <a class="px-3 py-2 text-sm font-medium rounded-lg transition-smooth text-foreground/70 hover:text-primary hover:bg-primary/5"
               href="architecture.html">AI</a> -->
 
-            <a class="px-3 py-2 text-sm font-medium rounded-lg transition-smooth text-foreground/70 hover:text-primary hover:bg-primary/5"
-              href="about.html">About Us</a><a
-              class="px-3 py-2 text-sm font-medium rounded-lg transition-smooth text-foreground/70 hover:text-primary hover:bg-primary/5"
-              href="contact.html">Contact</a>
-          </nav>
-          <div class="hidden lg:flex"><a
-              class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary hover:bg-primary/90 h-10 px-4 py-2 rounded-full gradient-hero text-white border-0 shadow-soft hover:shadow-glow"
-              href="demo.html">Try Demo</a></div><button class="lg:hidden p-2 rounded-lg hover:bg-muted"
-            aria-label="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="lucide lucide-menu">
-              <line x1="4" x2="20" y1="12" y2="12"></line>
-              <line x1="4" x2="20" y1="6" y2="6"></line>
-              <line x1="4" x2="20" y1="18" y2="18"></line>
-            </svg></button>
-        </div>
-      </header>
-      <main class="flex-1 pt-16">
-        <section class="relative overflow-hidden">
-          <div class="absolute inset-0 gradient-soft -z-10"></div>
-          <div
-            class="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full gradient-hero opacity-20 blur-3xl animate-pulse-glow -z-10">
-          </div>
-          <div
-            class="absolute -bottom-40 -left-40 w-[400px] h-[400px] rounded-full bg-accent opacity-30 blur-3xl -z-10">
-          </div>
-          <div class="container py-20 md:py-28 grid lg:grid-cols-2 gap-12 items-center">
-            <div class="animate-fade-up"><span
-                class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/70 backdrop-blur border border-primary/20 text-sm font-medium text-primary mb-6 shadow-soft"><svg
-                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-sparkles w-4 h-4">
-                  <path
-                    d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z">
-                  </path>
-                  <path d="M20 3v4"></path>
-                  <path d="M22 5h-4"></path>
-                  <path d="M4 17v2"></path>
-                  <path d="M5 18H3"></path>
-                </svg> AI for Speech Therapy · Final Year Research</span>
-              <h1 class="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold leading-[1.05] tracking-tight">
-                Helping Children <br><span class="text-gradient">Speak Better</span> with AI</h1>
-              <p class="mt-6 text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed">An intelligent speech
-                therapy platform using pronunciation analysis, interactive games, and therapist insights — built for
-                children, parents, and clinicians.</p>
-              <div class="mt-8 flex flex-wrap gap-3"><a
-                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary hover:bg-primary/90 rounded-full gradient-hero text-white border-0 shadow-soft hover:shadow-glow h-12 px-6"
-                  href="demo.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-play w-4 h-4">
-                    <polygon points="6 3 20 12 6 21 6 3"></polygon>
-                  </svg> Watch Demo</a><a
-                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border bg-background hover:text-accent-foreground rounded-full h-12 px-6 border-primary/30 hover:bg-primary/5"
-                  href="domain.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-book-open w-4 h-4">
-                    <path d="M12 7v14"></path>
-                    <path
-                      d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z">
-                    </path>
-                  </svg> View Research</a><a
-                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:text-accent-foreground rounded-full h-12 px-6 text-primary hover:bg-primary/10"
-                  href="architecture.html">Try Prototype <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4">
-                    <path d="M5 12h14"></path>
-                    <path d="m12 5 7 7-7 7"></path>
-                  </svg></a></div>
-              <div class="mt-10 flex items-center gap-4 text-sm text-muted-foreground">
-                <div class="flex items-end gap-1 h-16 w-32"><span
-                    class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                    style="height: 40%; animation-delay: 0s;"></span><span
-                    class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                    style="height: 70%; animation-delay: 0.08s;"></span><span
-                    class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                    style="height: 90%; animation-delay: 0.16s;"></span><span
-                    class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                    style="height: 60%; animation-delay: 0.24s;"></span><span
-                    class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                    style="height: 100%; animation-delay: 0.32s;"></span><span
-                    class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                    style="height: 50%; animation-delay: 0.4s;"></span><span
-                    class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                    style="height: 80%; animation-delay: 0.48s;"></span><span
-                    class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                    style="height: 35%; animation-delay: 0.56s;"></span><span
-                    class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                    style="height: 75%; animation-delay: 0.64s;"></span><span
-                    class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                    style="height: 55%; animation-delay: 0.72s;"></span><span
-                    class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                    style="height: 95%; animation-delay: 0.8s;"></span><span
-                    class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                    style="height: 45%; animation-delay: 0.88s;"></span></div><span>Live AI listening · powered by
-                  Whisper</span>
-              </div>
+              <a
+                class="px-3 py-2 text-sm font-medium rounded-lg transition-smooth text-foreground/70 hover:text-primary hover:bg-primary/5"
+                href="about.html"
+                >About Us</a
+              ><a
+                class="px-3 py-2 text-sm font-medium rounded-lg transition-smooth text-foreground/70 hover:text-primary hover:bg-primary/5"
+                href="contact.html"
+                >Contact</a
+              >
+            </nav>
+            <div class="hidden lg:flex">
+              <a
+                class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary hover:bg-primary/90 h-10 px-4 py-2 rounded-full gradient-hero text-white border-0 shadow-soft hover:shadow-glow"
+                href="demo.html"
+                >Try Demo</a
+              >
             </div>
-            <div class="relative animate-fade-up" style="animation-delay: 0.15s;">
-              <div class="absolute inset-0 gradient-hero rounded-[3rem] blur-3xl opacity-30 animate-pulse-glow"></div>
+            <button
+              class="lg:hidden p-2 rounded-lg hover:bg-muted"
+              aria-label="Menu"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-menu"
+              >
+                <line x1="4" x2="20" y1="12" y2="12"></line>
+                <line x1="4" x2="20" y1="6" y2="6"></line>
+                <line x1="4" x2="20" y1="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </header>
+        <main class="flex-1 pt-16">
+          <section class="relative overflow-hidden">
+            <div class="absolute inset-0 gradient-soft -z-10"></div>
+            <div
+              class="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full gradient-hero opacity-20 blur-3xl animate-pulse-glow -z-10"
+            ></div>
+            <div
+              class="absolute -bottom-40 -left-40 w-[400px] h-[400px] rounded-full bg-accent opacity-30 blur-3xl -z-10"
+            ></div>
+            <div
+              class="container py-20 md:py-28 grid lg:grid-cols-2 gap-12 items-center"
+            >
+              <div class="animate-fade-up">
+                <span
+                  class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/70 backdrop-blur border border-primary/20 text-sm font-medium text-primary mb-6 shadow-soft"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-sparkles w-4 h-4"
+                  >
+                    <path
+                      d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"
+                    ></path>
+                    <path d="M20 3v4"></path>
+                    <path d="M22 5h-4"></path>
+                    <path d="M4 17v2"></path>
+                    <path d="M5 18H3"></path>
+                  </svg>
+                  AI for Speech Therapy · Final Year Research</span
+                >
+                <h1
+                  class="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold leading-[1.05] tracking-tight"
+                >
+                  Helping Children <br /><span class="text-gradient"
+                    >Speak Better</span
+                  >
+                  with AI
+                </h1>
+                <p
+                  class="mt-6 text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed"
+                >
+                  An intelligent speech therapy platform using pronunciation
+                  analysis, interactive games, and therapist insights — built
+                  for children, parents, and clinicians.
+                </p>
+                <div class="mt-8 flex flex-wrap gap-3">
+                  <a
+                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary hover:bg-primary/90 rounded-full gradient-hero text-white border-0 shadow-soft hover:shadow-glow h-12 px-6"
+                    href="demo.html"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-play w-4 h-4"
+                    >
+                      <polygon points="6 3 20 12 6 21 6 3"></polygon>
+                    </svg>
+                    Watch Demo</a
+                  ><a
+                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border bg-background hover:text-accent-foreground rounded-full h-12 px-6 border-primary/30 hover:bg-primary/5"
+                    href="domain.html"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-book-open w-4 h-4"
+                    >
+                      <path d="M12 7v14"></path>
+                      <path
+                        d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
+                      ></path>
+                    </svg>
+                    View Research</a
+                  ><a
+                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:text-accent-foreground rounded-full h-12 px-6 text-primary hover:bg-primary/10"
+                    href="architecture.html"
+                    >Try Prototype
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-arrow-right w-4 h-4"
+                    >
+                      <path d="M5 12h14"></path>
+                      <path d="m12 5 7 7-7 7"></path></svg
+                  ></a>
+                </div>
+                <div
+                  class="mt-10 flex items-center gap-4 text-sm text-muted-foreground"
+                >
+                  <div class="flex items-end gap-1 h-16 w-32">
+                    <span
+                      class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                      style="height: 40%; animation-delay: 0s"
+                    ></span
+                    ><span
+                      class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                      style="height: 70%; animation-delay: 0.08s"
+                    ></span
+                    ><span
+                      class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                      style="height: 90%; animation-delay: 0.16s"
+                    ></span
+                    ><span
+                      class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                      style="height: 60%; animation-delay: 0.24s"
+                    ></span
+                    ><span
+                      class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                      style="height: 100%; animation-delay: 0.32s"
+                    ></span
+                    ><span
+                      class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                      style="height: 50%; animation-delay: 0.4s"
+                    ></span
+                    ><span
+                      class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                      style="height: 80%; animation-delay: 0.48s"
+                    ></span
+                    ><span
+                      class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                      style="height: 35%; animation-delay: 0.56s"
+                    ></span
+                    ><span
+                      class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                      style="height: 75%; animation-delay: 0.64s"
+                    ></span
+                    ><span
+                      class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                      style="height: 55%; animation-delay: 0.72s"
+                    ></span
+                    ><span
+                      class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                      style="height: 95%; animation-delay: 0.8s"
+                    ></span
+                    ><span
+                      class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                      style="height: 45%; animation-delay: 0.88s"
+                    ></span>
+                  </div>
+                  <span>Live AI listening · powered by Whisper</span>
+                </div>
+              </div>
               <div
-                class="relative mx-auto w-[320px] md:w-[380px] aspect-[9/18] rounded-[3rem] bg-gradient-to-b from-white to-purple-50 border-8 border-foreground/90 shadow-glow overflow-hidden animate-float">
-                <div class="absolute top-0 inset-x-0 h-6 bg-foreground/90 rounded-b-2xl mx-20"></div>
-                <div class="absolute inset-0 p-6 pt-10 flex flex-col items-center justify-center"><img
-                    src="assets/onboard2.png" alt="Child speaking with AI" class="w-full max-h-[60%] object-contain"
-                    width="760" height="760">
-                  <div class="mt-4 w-full bg-white rounded-2xl p-4 shadow-card">
-                    <div class="flex items-center justify-between mb-2"><span
-                        class="text-xs font-semibold text-primary">Pronunciation</span><span
-                        class="text-xs font-bold text-emerald-600">94%</span></div>
-                    <div class="flex items-end gap-1 h-16 w-full h-10"><span
-                        class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                        style="height: 40%; animation-delay: 0s;"></span><span
-                        class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                        style="height: 70%; animation-delay: 0.08s;"></span><span
-                        class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                        style="height: 90%; animation-delay: 0.16s;"></span><span
-                        class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                        style="height: 60%; animation-delay: 0.24s;"></span><span
-                        class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                        style="height: 100%; animation-delay: 0.32s;"></span><span
-                        class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                        style="height: 50%; animation-delay: 0.4s;"></span><span
-                        class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                        style="height: 80%; animation-delay: 0.48s;"></span><span
-                        class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                        style="height: 35%; animation-delay: 0.56s;"></span><span
-                        class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                        style="height: 75%; animation-delay: 0.64s;"></span><span
-                        class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                        style="height: 55%; animation-delay: 0.72s;"></span><span
-                        class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                        style="height: 95%; animation-delay: 0.8s;"></span><span
-                        class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
-                        style="height: 45%; animation-delay: 0.88s;"></span></div>
-                    <p class="mt-2 text-xs text-muted-foreground">"Strawberry" — perfect!</p>
+                class="relative animate-fade-up"
+                style="animation-delay: 0.15s"
+              >
+                <div
+                  class="absolute inset-0 gradient-hero rounded-[3rem] blur-3xl opacity-30 animate-pulse-glow"
+                ></div>
+                <div
+                  class="relative mx-auto w-[320px] md:w-[380px] aspect-[9/18] rounded-[3rem] bg-gradient-to-b from-white to-purple-50 border-8 border-foreground/90 shadow-glow overflow-hidden animate-float"
+                >
+                  <div
+                    class="absolute top-0 inset-x-0 h-6 bg-foreground/90 rounded-b-2xl mx-20"
+                  ></div>
+                  <div
+                    class="absolute inset-0 p-6 pt-10 flex flex-col items-center justify-center"
+                  >
+                    <img
+                      src="assets/onboard2.png"
+                      alt="Child speaking with AI"
+                      class="w-full max-h-[60%] object-contain"
+                      width="760"
+                      height="760"
+                    />
+                    <div
+                      class="mt-4 w-full bg-white rounded-2xl p-4 shadow-card"
+                    >
+                      <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-semibold text-primary"
+                          >Pronunciation</span
+                        ><span class="text-xs font-bold text-emerald-600"
+                          >94%</span
+                        >
+                      </div>
+                      <div class="flex items-end gap-1 h-16 w-full h-10">
+                        <span
+                          class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                          style="height: 40%; animation-delay: 0s"
+                        ></span
+                        ><span
+                          class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                          style="height: 70%; animation-delay: 0.08s"
+                        ></span
+                        ><span
+                          class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                          style="height: 90%; animation-delay: 0.16s"
+                        ></span
+                        ><span
+                          class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                          style="height: 60%; animation-delay: 0.24s"
+                        ></span
+                        ><span
+                          class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                          style="height: 100%; animation-delay: 0.32s"
+                        ></span
+                        ><span
+                          class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                          style="height: 50%; animation-delay: 0.4s"
+                        ></span
+                        ><span
+                          class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                          style="height: 80%; animation-delay: 0.48s"
+                        ></span
+                        ><span
+                          class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                          style="height: 35%; animation-delay: 0.56s"
+                        ></span
+                        ><span
+                          class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                          style="height: 75%; animation-delay: 0.64s"
+                        ></span
+                        ><span
+                          class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                          style="height: 55%; animation-delay: 0.72s"
+                        ></span
+                        ><span
+                          class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                          style="height: 95%; animation-delay: 0.8s"
+                        ></span
+                        ><span
+                          class="waveform-bar w-1.5 rounded-full bg-gradient-to-t from-primary to-primary-glow"
+                          style="height: 45%; animation-delay: 0.88s"
+                        ></span>
+                      </div>
+                      <p class="mt-2 text-xs text-muted-foreground">
+                        "Strawberry" — perfect!
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-        <section class="container py-20">
-          <div class="max-w-3xl mb-12 mx-auto text-center"><span
-              class="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-primary/10 text-primary mb-4">The
-              Problem</span>
-            <h2 class="text-3xl md:text-5xl font-display font-extrabold leading-tight"><span>Speech therapy is
-              </span><span class="text-gradient">broken</span><span> for too many children</span></h2>
-            <p class="mt-4 text-lg text-muted-foreground leading-relaxed">Traditional sessions are expensive, hard to
-              access, and rarely engaging enough to keep kids practicing at home.</p>
-          </div>
-          <div class="grid md:grid-cols-3 gap-6">
-            <div
-              class="bg-card text-card-foreground shadow-sm p-8 text-center rounded-3xl border-0 shadow-card gradient-card hover:shadow-glow transition-smooth">
-              <div class="text-4xl md:text-5xl font-display font-extrabold text-gradient mb-2">1 in 12</div>
-              <p class="text-muted-foreground">children have a speech disorder</p>
+          </section>
+          <section class="container py-20">
+            <div class="max-w-3xl mb-12 mx-auto text-center">
+              <span
+                class="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-primary/10 text-primary mb-4"
+                >The Problem</span
+              >
+              <h2
+                class="text-3xl md:text-5xl font-display font-extrabold leading-tight"
+              >
+                <span>Speech therapy is </span
+                ><span class="text-gradient">broken</span
+                ><span> for too many children</span>
+              </h2>
+              <p class="mt-4 text-lg text-muted-foreground leading-relaxed">
+                Traditional sessions are expensive, hard to access, and rarely
+                engaging enough to keep kids practicing at home.
+              </p>
             </div>
-            <div
-              class="bg-card text-card-foreground shadow-sm p-8 text-center rounded-3xl border-0 shadow-card gradient-card hover:shadow-glow transition-smooth">
-              <div class="text-4xl md:text-5xl font-display font-extrabold text-gradient mb-2">70%</div>
-              <p class="text-muted-foreground">lack consistent therapy access</p>
-            </div>
-            <div
-              class="bg-card text-card-foreground shadow-sm p-8 text-center rounded-3xl border-0 shadow-card gradient-card hover:shadow-glow transition-smooth">
-              <div class="text-4xl md:text-5xl font-display font-extrabold text-gradient mb-2">8x</div>
-              <p class="text-muted-foreground">faster progress with daily practice</p>
-            </div>
-          </div>
-        </section>
-        <section class="container py-20">
-          <div class="max-w-3xl mb-12 mx-auto text-center"><span
-              class="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-primary/10 text-primary mb-4">Our
-              Solution</span>
-            <h2 class="text-3xl md:text-5xl font-display font-extrabold leading-tight"><span>One app. </span><span
-                class="text-gradient">Four superpowers.</span><span></span></h2>
-            <p class="mt-4 text-lg text-muted-foreground leading-relaxed">TeraTalk combines clinical-grade analysis with
-              the playful magic kids love.</p>
-          </div>
-          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            <div
-              class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl border border-border hover:border-primary/30 hover:shadow-soft transition-smooth group">
+            <div class="grid md:grid-cols-3 gap-6">
               <div
-                class="w-12 h-12 rounded-2xl gradient-hero grid place-items-center mb-4 group-hover:scale-110 transition-smooth">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-mic w-6 h-6 text-white">
-                  <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
-                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
-                  <line x1="12" x2="12" y1="19" y2="22"></line>
-                </svg>
-              </div>
-              <h3 class="font-display font-bold text-lg mb-2">Pronunciation Scoring</h3>
-              <p class="text-sm text-muted-foreground">AI-graded speech with instant phoneme-level feedback.</p>
-            </div>
-            <div
-              class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl border border-border hover:border-primary/30 hover:shadow-soft transition-smooth group">
-              <div
-                class="w-12 h-12 rounded-2xl gradient-hero grid place-items-center mb-4 group-hover:scale-110 transition-smooth">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-gamepad2 w-6 h-6 text-white">
-                  <line x1="6" x2="10" y1="11" y2="11"></line>
-                  <line x1="8" x2="8" y1="9" y2="13"></line>
-                  <line x1="15" x2="15.01" y1="12" y2="12"></line>
-                  <line x1="18" x2="18.01" y1="10" y2="10"></line>
-                  <path
-                    d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z">
-                  </path>
-                </svg>
-              </div>
-              <h3 class="font-display font-bold text-lg mb-2">Therapy Games</h3>
-              <p class="text-sm text-muted-foreground">Playful exercises kids actually want to repeat.</p>
-            </div>
-            <div
-              class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl border border-border hover:border-primary/30 hover:shadow-soft transition-smooth group">
-              <div
-                class="w-12 h-12 rounded-2xl gradient-hero grid place-items-center mb-4 group-hover:scale-110 transition-smooth">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-stethoscope w-6 h-6 text-white">
-                  <path d="M11 2v2"></path>
-                  <path d="M5 2v2"></path>
-                  <path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"></path>
-                  <path d="M8 15a6 6 0 0 0 12 0v-3"></path>
-                  <circle cx="20" cy="10" r="2"></circle>
-                </svg>
-              </div>
-              <h3 class="font-display font-bold text-lg mb-2">Therapist Dashboard</h3>
-              <p class="text-sm text-muted-foreground">Real-time progress, custom plans, session notes.</p>
-            </div>
-            <div
-              class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl border border-border hover:border-primary/30 hover:shadow-soft transition-smooth group">
-              <div
-                class="w-12 h-12 rounded-2xl gradient-hero grid place-items-center mb-4 group-hover:scale-110 transition-smooth">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-chart-column w-6 h-6 text-white">
-                  <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
-                  <path d="M18 17V9"></path>
-                  <path d="M13 17V5"></path>
-                  <path d="M8 17v-3"></path>
-                </svg>
-              </div>
-              <h3 class="font-display font-bold text-lg mb-2">Progress Tracking</h3>
-              <p class="text-sm text-muted-foreground">Parents see growth across weeks and milestones.</p>
-            </div>
-          </div>
-        </section>
-        <section class="py-20 gradient-soft">
-          <div class="container">
-            <div class="max-w-3xl mb-12 mx-auto text-center"><span
-                class="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-primary/10 text-primary mb-4">Key
-                Features</span>
-              <h2 class="text-3xl md:text-5xl font-display font-extrabold leading-tight"><span>Made for kids.
-                </span><span class="text-gradient">Loved by therapists.</span><span></span></h2>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div
-                class="bg-card text-card-foreground shadow-sm p-7 rounded-3xl border-0 shadow-card hover:shadow-glow hover:-translate-y-1 transition-smooth">
+                class="bg-card text-card-foreground shadow-sm p-8 text-center rounded-3xl border-0 shadow-card gradient-card hover:shadow-glow transition-smooth"
+              >
                 <div
-                  class="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-400 to-purple-500 grid place-items-center mb-5 shadow-soft">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-candy w-7 h-7 text-white">
-                    <path d="m9.5 7.5-2 2a4.95 4.95 0 1 0 7 7l2-2a4.95 4.95 0 1 0-7-7Z"></path>
-                    <path d="M14 6.5v10"></path>
-                    <path d="M10 7.5v10"></path>
-                    <path d="m16 7 1-5 1.37.68A3 3 0 0 0 19.7 3H21v1.3c0 .46.1.92.32 1.33L22 7l-5 1"></path>
-                    <path d="m8 17-1 5-1.37-.68A3 3 0 0 0 4.3 21H3v-1.3a3 3 0 0 0-.32-1.33L2 17l5-1"></path>
-                  </svg>
+                  class="text-4xl md:text-5xl font-display font-extrabold text-gradient mb-2"
+                >
+                  1 in 12
                 </div>
-                <h3 class="font-display font-bold text-xl mb-2">Candyland Therapy Game</h3>
-                <p class="text-muted-foreground">Sweet adventures that gamify articulation drills.</p>
+                <p class="text-muted-foreground">
+                  children have a speech disorder
+                </p>
               </div>
               <div
-                class="bg-card text-card-foreground shadow-sm p-7 rounded-3xl border-0 shadow-card hover:shadow-glow hover:-translate-y-1 transition-smooth">
+                class="bg-card text-card-foreground shadow-sm p-8 text-center rounded-3xl border-0 shadow-card gradient-card hover:shadow-glow transition-smooth"
+              >
                 <div
-                  class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-pink-500 grid place-items-center mb-5 shadow-soft">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-chef-hat w-7 h-7 text-white">
+                  class="text-4xl md:text-5xl font-display font-extrabold text-gradient mb-2"
+                >
+                  70%
+                </div>
+                <p class="text-muted-foreground">
+                  lack consistent therapy access
+                </p>
+              </div>
+              <div
+                class="bg-card text-card-foreground shadow-sm p-8 text-center rounded-3xl border-0 shadow-card gradient-card hover:shadow-glow transition-smooth"
+              >
+                <div
+                  class="text-4xl md:text-5xl font-display font-extrabold text-gradient mb-2"
+                >
+                  8x
+                </div>
+                <p class="text-muted-foreground">
+                  faster progress with daily practice
+                </p>
+              </div>
+            </div>
+          </section>
+          <section class="container py-20">
+            <div class="max-w-3xl mb-12 mx-auto text-center">
+              <span
+                class="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-primary/10 text-primary mb-4"
+                >Our Solution</span
+              >
+              <h2
+                class="text-3xl md:text-5xl font-display font-extrabold leading-tight"
+              >
+                <span>One app. </span
+                ><span class="text-gradient">Four superpowers.</span
+                ><span></span>
+              </h2>
+              <p class="mt-4 text-lg text-muted-foreground leading-relaxed">
+                TeraTalk combines clinical-grade analysis with the playful magic
+                kids love.
+              </p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              <div
+                class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl border border-border hover:border-primary/30 hover:shadow-soft transition-smooth group"
+              >
+                <div
+                  class="w-12 h-12 rounded-2xl gradient-hero grid place-items-center mb-4 group-hover:scale-110 transition-smooth"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-mic w-6 h-6 text-white"
+                  >
                     <path
-                      d="M17 21a1 1 0 0 0 1-1v-5.35c0-.457.316-.844.727-1.041a4 4 0 0 0-2.134-7.589 5 5 0 0 0-9.186 0 4 4 0 0 0-2.134 7.588c.411.198.727.585.727 1.041V20a1 1 0 0 0 1 1Z">
-                    </path>
-                    <path d="M6 17h12"></path>
-                  </svg>
-                </div>
-                <h3 class="font-display font-bold text-xl mb-2">Cooking Pronunciation Game</h3>
-                <p class="text-muted-foreground">Cook recipes by saying ingredients correctly.</p>
-              </div>
-              <div
-                class="bg-card text-card-foreground shadow-sm p-7 rounded-3xl border-0 shadow-card hover:shadow-glow hover:-translate-y-1 transition-smooth">
-                <div
-                  class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-500 grid place-items-center mb-5 shadow-soft">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-mic w-7 h-7 text-white">
-                    <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+                      d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"
+                    ></path>
                     <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
                     <line x1="12" x2="12" y1="19" y2="22"></line>
                   </svg>
                 </div>
-                <h3 class="font-display font-bold text-xl mb-2">Speech Recognition</h3>
-                <p class="text-muted-foreground">Whisper-powered ASR fine-tuned for kids' voices.</p>
+                <h3 class="font-display font-bold text-lg mb-2">
+                  Pronunciation Scoring
+                </h3>
+                <p class="text-sm text-muted-foreground">
+                  AI-graded speech with instant phoneme-level feedback.
+                </p>
               </div>
               <div
-                class="bg-card text-card-foreground shadow-sm p-7 rounded-3xl border-0 shadow-card hover:shadow-glow hover:-translate-y-1 transition-smooth">
+                class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl border border-border hover:border-primary/30 hover:shadow-soft transition-smooth group"
+              >
                 <div
-                  class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-400 to-purple-500 grid place-items-center mb-5 shadow-soft">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-chart-column w-7 h-7 text-white">
+                  class="w-12 h-12 rounded-2xl gradient-hero grid place-items-center mb-4 group-hover:scale-110 transition-smooth"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-gamepad2 w-6 h-6 text-white"
+                  >
+                    <line x1="6" x2="10" y1="11" y2="11"></line>
+                    <line x1="8" x2="8" y1="9" y2="13"></line>
+                    <line x1="15" x2="15.01" y1="12" y2="12"></line>
+                    <line x1="18" x2="18.01" y1="10" y2="10"></line>
+                    <path
+                      d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"
+                    ></path>
+                  </svg>
+                </div>
+                <h3 class="font-display font-bold text-lg mb-2">
+                  Therapy Games
+                </h3>
+                <p class="text-sm text-muted-foreground">
+                  Playful exercises kids actually want to repeat.
+                </p>
+              </div>
+              <div
+                class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl border border-border hover:border-primary/30 hover:shadow-soft transition-smooth group"
+              >
+                <div
+                  class="w-12 h-12 rounded-2xl gradient-hero grid place-items-center mb-4 group-hover:scale-110 transition-smooth"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-stethoscope w-6 h-6 text-white"
+                  >
+                    <path d="M11 2v2"></path>
+                    <path d="M5 2v2"></path>
+                    <path
+                      d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"
+                    ></path>
+                    <path d="M8 15a6 6 0 0 0 12 0v-3"></path>
+                    <circle cx="20" cy="10" r="2"></circle>
+                  </svg>
+                </div>
+                <h3 class="font-display font-bold text-lg mb-2">
+                  Therapist Dashboard
+                </h3>
+                <p class="text-sm text-muted-foreground">
+                  Real-time progress, custom plans, session notes.
+                </p>
+              </div>
+              <div
+                class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl border border-border hover:border-primary/30 hover:shadow-soft transition-smooth group"
+              >
+                <div
+                  class="w-12 h-12 rounded-2xl gradient-hero grid place-items-center mb-4 group-hover:scale-110 transition-smooth"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-chart-column w-6 h-6 text-white"
+                  >
                     <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
                     <path d="M18 17V9"></path>
                     <path d="M13 17V5"></path>
                     <path d="M8 17v-3"></path>
                   </svg>
                 </div>
-                <h3 class="font-display font-bold text-xl mb-2">Parent Dashboard</h3>
-                <p class="text-muted-foreground">Daily streaks, weekly reports, celebration moments.</p>
+                <h3 class="font-display font-bold text-lg mb-2">
+                  Progress Tracking
+                </h3>
+                <p class="text-sm text-muted-foreground">
+                  Parents see growth across weeks and milestones.
+                </p>
+              </div>
+            </div>
+          </section>
+          <section class="py-20 gradient-soft">
+            <div class="container">
+              <div class="max-w-3xl mb-12 mx-auto text-center">
+                <span
+                  class="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-primary/10 text-primary mb-4"
+                  >Key Features</span
+                >
+                <h2
+                  class="text-3xl md:text-5xl font-display font-extrabold leading-tight"
+                >
+                  <span>Made for kids. </span
+                  ><span class="text-gradient">Loved by therapists.</span
+                  ><span></span>
+                </h2>
+              </div>
+              <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div
+                  class="bg-card text-card-foreground shadow-sm p-7 rounded-3xl border-0 shadow-card hover:shadow-glow hover:-translate-y-1 transition-smooth"
+                >
+                  <div
+                    class="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-400 to-purple-500 grid place-items-center mb-5 shadow-soft"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-candy w-7 h-7 text-white"
+                    >
+                      <path
+                        d="m9.5 7.5-2 2a4.95 4.95 0 1 0 7 7l2-2a4.95 4.95 0 1 0-7-7Z"
+                      ></path>
+                      <path d="M14 6.5v10"></path>
+                      <path d="M10 7.5v10"></path>
+                      <path
+                        d="m16 7 1-5 1.37.68A3 3 0 0 0 19.7 3H21v1.3c0 .46.1.92.32 1.33L22 7l-5 1"
+                      ></path>
+                      <path
+                        d="m8 17-1 5-1.37-.68A3 3 0 0 0 4.3 21H3v-1.3a3 3 0 0 0-.32-1.33L2 17l5-1"
+                      ></path>
+                    </svg>
+                  </div>
+                  <h3 class="font-display font-bold text-xl mb-2">
+                    Candyland Therapy Game
+                  </h3>
+                  <p class="text-muted-foreground">
+                    Sweet adventures that gamify articulation drills.
+                  </p>
+                </div>
+                <div
+                  class="bg-card text-card-foreground shadow-sm p-7 rounded-3xl border-0 shadow-card hover:shadow-glow hover:-translate-y-1 transition-smooth"
+                >
+                  <div
+                    class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-pink-500 grid place-items-center mb-5 shadow-soft"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-chef-hat w-7 h-7 text-white"
+                    >
+                      <path
+                        d="M17 21a1 1 0 0 0 1-1v-5.35c0-.457.316-.844.727-1.041a4 4 0 0 0-2.134-7.589 5 5 0 0 0-9.186 0 4 4 0 0 0-2.134 7.588c.411.198.727.585.727 1.041V20a1 1 0 0 0 1 1Z"
+                      ></path>
+                      <path d="M6 17h12"></path>
+                    </svg>
+                  </div>
+                  <h3 class="font-display font-bold text-xl mb-2">
+                    Cooking Pronunciation Game
+                  </h3>
+                  <p class="text-muted-foreground">
+                    Cook recipes by saying ingredients correctly.
+                  </p>
+                </div>
+                <div
+                  class="bg-card text-card-foreground shadow-sm p-7 rounded-3xl border-0 shadow-card hover:shadow-glow hover:-translate-y-1 transition-smooth"
+                >
+                  <div
+                    class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-500 grid place-items-center mb-5 shadow-soft"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-mic w-7 h-7 text-white"
+                    >
+                      <path
+                        d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"
+                      ></path>
+                      <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                      <line x1="12" x2="12" y1="19" y2="22"></line>
+                    </svg>
+                  </div>
+                  <h3 class="font-display font-bold text-xl mb-2">
+                    Speech Recognition
+                  </h3>
+                  <p class="text-muted-foreground">
+                    Whisper-powered ASR fine-tuned for kids' voices.
+                  </p>
+                </div>
+                <div
+                  class="bg-card text-card-foreground shadow-sm p-7 rounded-3xl border-0 shadow-card hover:shadow-glow hover:-translate-y-1 transition-smooth"
+                >
+                  <div
+                    class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-400 to-purple-500 grid place-items-center mb-5 shadow-soft"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-chart-column w-7 h-7 text-white"
+                    >
+                      <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+                      <path d="M18 17V9"></path>
+                      <path d="M13 17V5"></path>
+                      <path d="M8 17v-3"></path>
+                    </svg>
+                  </div>
+                  <h3 class="font-display font-bold text-xl mb-2">
+                    Parent Dashboard
+                  </h3>
+                  <p class="text-muted-foreground">
+                    Daily streaks, weekly reports, celebration moments.
+                  </p>
+                </div>
+                <div
+                  class="bg-card text-card-foreground shadow-sm p-7 rounded-3xl border-0 shadow-card hover:shadow-glow hover:-translate-y-1 transition-smooth"
+                >
+                  <div
+                    class="w-14 h-14 rounded-2xl bg-gradient-to-br from-fuchsia-500 to-pink-500 grid place-items-center mb-5 shadow-soft"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-stethoscope w-7 h-7 text-white"
+                    >
+                      <path d="M11 2v2"></path>
+                      <path d="M5 2v2"></path>
+                      <path
+                        d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"
+                      ></path>
+                      <path d="M8 15a6 6 0 0 0 12 0v-3"></path>
+                      <circle cx="20" cy="10" r="2"></circle>
+                    </svg>
+                  </div>
+                  <h3 class="font-display font-bold text-xl mb-2">
+                    Therapist Insights
+                  </h3>
+                  <p class="text-muted-foreground">
+                    Analytics that turn audio into actionable therapy.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="container py-20">
+            <div class="max-w-3xl mb-12 mx-auto text-center">
+              <span
+                class="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-primary/10 text-primary mb-4"
+                >How It Works</span
+              >
+              <h2
+                class="text-3xl md:text-5xl font-display font-extrabold leading-tight"
+              >
+                <span>From spoken word to </span
+                ><span class="text-gradient">measurable progress</span
+                ><span></span>
+              </h2>
+            </div>
+            <div
+              class="flex flex-col gap-6 md:flex-row md:flex-nowrap md:items-stretch md:gap-4 lg:gap-6 relative"
+            >
+              <div class="relative flex-1 min-w-0">
+                <div
+                  class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl h-full border-0 shadow-card"
+                >
+                  <div class="text-sm font-bold text-primary mb-2">STEP 01</div>
+                  <h3 class="font-display font-bold text-xl mb-2">
+                    Child speaks
+                  </h3>
+                  <p class="text-sm text-muted-foreground">
+                    Into a fun, friendly app interface.
+                  </p>
+                </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-arrow-right hidden md:block absolute top-1/2 -right-4 w-6 h-6 text-primary/40"
+                >
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </div>
+              <div class="relative flex-1 min-w-0">
+                <div
+                  class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl h-full border-0 shadow-card"
+                >
+                  <div class="text-sm font-bold text-primary mb-2">STEP 02</div>
+                  <h3 class="font-display font-bold text-xl mb-2">
+                    AI listens
+                  </h3>
+                  <p class="text-sm text-muted-foreground">
+                    Whisper + custom pronunciation model.
+                  </p>
+                </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-arrow-right hidden md:block absolute top-1/2 -right-4 w-6 h-6 text-primary/40"
+                >
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </div>
+              <div class="relative flex-1 min-w-0">
+                <div
+                  class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl h-full border-0 shadow-card"
+                >
+                  <div class="text-sm font-bold text-primary mb-2">STEP 03</div>
+                  <h3 class="font-display font-bold text-xl mb-2">
+                    Score &amp; feedback
+                  </h3>
+                  <p class="text-sm text-muted-foreground">
+                    Phoneme-level guidance, instantly.
+                  </p>
+                </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-arrow-right hidden md:block absolute top-1/2 -right-4 w-6 h-6 text-primary/40"
+                >
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </div>
+              <div class="relative flex-1 min-w-0">
+                <div
+                  class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl h-full border-0 shadow-card"
+                >
+                  <div class="text-sm font-bold text-primary mb-2">STEP 04</div>
+                  <h3 class="font-display font-bold text-xl mb-2">
+                    Personalize
+                  </h3>
+                  <p class="text-sm text-muted-foreground">
+                    Plans and exercises adapt to each child's goals.
+                  </p>
+                </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-arrow-right hidden md:block absolute top-1/2 -right-4 w-6 h-6 text-primary/40"
+                >
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </div>
+              <div class="relative flex-1 min-w-0">
+                <div
+                  class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl h-full border-0 shadow-card"
+                >
+                  <div class="text-sm font-bold text-primary mb-2">STEP 05</div>
+                  <h3 class="font-display font-bold text-xl mb-2">
+                    Progress tracked
+                  </h3>
+                  <p class="text-sm text-muted-foreground">
+                    Parents and therapists stay in sync.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="container py-12">
+            <p
+              class="text-center text-sm font-semibold text-muted-foreground tracking-wider uppercase mb-6"
+            >
+              Built with
+            </p>
+            <div class="flex flex-wrap justify-center items-center gap-4">
+              <span
+                class="px-5 py-2 rounded-full bg-card border border-border font-display font-semibold text-foreground/80 shadow-soft"
+                >Flutter</span
+              ><span
+                class="px-5 py-2 rounded-full bg-card border border-border font-display font-semibold text-foreground/80 shadow-soft"
+                >Supabase</span
+              ><span
+                class="px-5 py-2 rounded-full bg-card border border-border font-display font-semibold text-foreground/80 shadow-soft"
+                >OpenAI</span
+              ><span
+                class="px-5 py-2 rounded-full bg-card border border-border font-display font-semibold text-foreground/80 shadow-soft"
+                >Python</span
+              ><span
+                class="px-5 py-2 rounded-full bg-card border border-border font-display font-semibold text-foreground/80 shadow-soft"
+                >Whisper</span
+              ><span
+                class="px-5 py-2 rounded-full bg-card border border-border font-display font-semibold text-foreground/80 shadow-soft"
+                >TensorFlow</span
+              >
+            </div>
+          </section>
+          <section class="container py-20">
+            <div class="max-w-3xl mb-12 mx-auto text-center">
+              <span
+                class="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-primary/10 text-primary mb-4"
+                >What's Next</span
+              >
+              <h2
+                class="text-3xl md:text-5xl font-display font-extrabold leading-tight"
+              >
+                <span>Future </span><span class="text-gradient">Expansion</span
+                ><span></span>
+              </h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+              <div
+                class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl border border-dashed border-primary/30 hover:border-primary hover:shadow-soft transition-smooth"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-globe w-8 h-8 text-primary mb-4"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path
+                    d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"
+                  ></path>
+                  <path d="M2 12h20"></path>
+                </svg>
+                <h3 class="font-display font-bold text-lg mb-2">
+                  Sinhala &amp; Tamil Support
+                </h3>
+                <p class="text-sm text-muted-foreground">
+                  Native language coverage for Sri Lankan children.
+                </p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-circle-check w-4 h-4 text-primary mt-4 opacity-60"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="m9 12 2 2 4-4"></path>
+                </svg>
               </div>
               <div
-                class="bg-card text-card-foreground shadow-sm p-7 rounded-3xl border-0 shadow-card hover:shadow-glow hover:-translate-y-1 transition-smooth">
-                <div
-                  class="w-14 h-14 rounded-2xl bg-gradient-to-br from-fuchsia-500 to-pink-500 grid place-items-center mb-5 shadow-soft">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-stethoscope w-7 h-7 text-white">
-                    <path d="M11 2v2"></path>
-                    <path d="M5 2v2"></path>
-                    <path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"></path>
-                    <path d="M8 15a6 6 0 0 0 12 0v-3"></path>
-                    <circle cx="20" cy="10" r="2"></circle>
-                  </svg>
+                class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl border border-dashed border-primary/30 hover:border-primary hover:shadow-soft transition-smooth"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-users w-8 h-8 text-primary mb-4"
+                >
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                <h3 class="font-display font-bold text-lg mb-2">
+                  Therapist Marketplace
+                </h3>
+                <p class="text-sm text-muted-foreground">
+                  Connect families to verified speech therapists.
+                </p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-circle-check w-4 h-4 text-primary mt-4 opacity-60"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="m9 12 2 2 4-4"></path>
+                </svg>
+              </div>
+              <div
+                class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl border border-dashed border-primary/30 hover:border-primary hover:shadow-soft transition-smooth"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-heart w-8 h-8 text-primary mb-4"
+                >
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  ></path>
+                </svg>
+                <h3 class="font-display font-bold text-lg mb-2">
+                  Global Launch
+                </h3>
+                <p class="text-sm text-muted-foreground">
+                  Bring affordable therapy to every child, everywhere.
+                </p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-circle-check w-4 h-4 text-primary mt-4 opacity-60"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="m9 12 2 2 4-4"></path>
+                </svg>
+              </div>
+            </div>
+          </section>
+          <section class="container pb-20">
+            <div
+              class="relative overflow-hidden rounded-[2rem] gradient-hero p-10 md:p-16 text-center text-white shadow-glow"
+            >
+              <div
+                class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.2),transparent)]"
+              ></div>
+              <div class="relative">
+                <h2
+                  class="text-3xl md:text-5xl font-display font-extrabold leading-tight"
+                >
+                  Ready to see TeraTalk in action?
+                </h2>
+                <p class="mt-4 text-lg text-white/90 max-w-xl mx-auto">
+                  Watch the demo, explore the research, or get in touch with the
+                  team.
+                </p>
+                <div class="mt-7 flex flex-wrap justify-center gap-3">
+                  <a
+                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 rounded-full bg-white text-primary hover:bg-white/90 h-12 px-6"
+                    href="demo.html"
+                    >Watch Demo</a
+                  ><a
+                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border hover:text-accent-foreground rounded-full bg-transparent border-white/40 text-white hover:bg-white/10 h-12 px-6"
+                    href="contact.html"
+                    >Contact the Team</a
+                  >
                 </div>
-                <h3 class="font-display font-bold text-xl mb-2">Therapist Insights</h3>
-                <p class="text-muted-foreground">Analytics that turn audio into actionable therapy.</p>
               </div>
             </div>
-          </div>
-        </section>
-        <section class="container py-20">
-          <div class="max-w-3xl mb-12 mx-auto text-center"><span
-              class="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-primary/10 text-primary mb-4">How
-              It Works</span>
-            <h2 class="text-3xl md:text-5xl font-display font-extrabold leading-tight"><span>From spoken word to
-              </span><span class="text-gradient">measurable progress</span><span></span></h2>
-          </div>
-          <div class="grid md:grid-cols-4 gap-6 relative">
-            <div class="relative">
-              <div class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl h-full border-0 shadow-card">
-                <div class="text-sm font-bold text-primary mb-2">STEP 01</div>
-                <h3 class="font-display font-bold text-xl mb-2">Child speaks</h3>
-                <p class="text-sm text-muted-foreground">Into a fun, friendly app interface.</p>
-              </div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-arrow-right hidden md:block absolute top-1/2 -right-4 w-6 h-6 text-primary/40">
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            </div>
-            <div class="relative">
-              <div class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl h-full border-0 shadow-card">
-                <div class="text-sm font-bold text-primary mb-2">STEP 02</div>
-                <h3 class="font-display font-bold text-xl mb-2">AI listens</h3>
-                <p class="text-sm text-muted-foreground">Whisper + custom pronunciation model.</p>
-              </div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-arrow-right hidden md:block absolute top-1/2 -right-4 w-6 h-6 text-primary/40">
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            </div>
-            <div class="relative">
-              <div class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl h-full border-0 shadow-card">
-                <div class="text-sm font-bold text-primary mb-2">STEP 03</div>
-                <h3 class="font-display font-bold text-xl mb-2">Score &amp; feedback</h3>
-                <p class="text-sm text-muted-foreground">Phoneme-level guidance, instantly.</p>
-              </div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-arrow-right hidden md:block absolute top-1/2 -right-4 w-6 h-6 text-primary/40">
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            </div>
-            <div class="relative">
-              <div class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl h-full border-0 shadow-card">
-                <div class="text-sm font-bold text-primary mb-2">STEP 04</div>
-                <h3 class="font-display font-bold text-xl mb-2">Progress tracked</h3>
-                <p class="text-sm text-muted-foreground">Parents and therapists stay in sync.</p>
+          </section>
+        </main>
+        <footer class="border-t border-border bg-muted/30 mt-20">
+          <div class="container py-14 grid gap-10 md:grid-cols-4">
+            <div class="md:col-span-2">
+              <a
+                class="flex items-center gap-2 font-display font-extrabold text-xl mb-3"
+                href="index.html"
+                ><span class="grid place-items-center w-24 h-24 overflow-hidden"
+                  ><img
+                    src="assets/logo.png"
+                    alt="TeraTalk Logo"
+                    class="w-full h-full object-contain" /></span
+              ></a>
+              <p class="text-muted-foreground max-w-md text-sm leading-relaxed">
+                An AI-powered speech therapy platform for children — combining
+                pronunciation analysis, interactive games, and therapist
+                insights to make therapy joyful, accessible, and effective.
+              </p>
+              <div
+                class="flex items-center gap-3 mt-4 text-sm text-muted-foreground"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-map-pin w-4 h-4"
+                >
+                  <path
+                    d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
+                  ></path>
+                  <circle cx="12" cy="10" r="3"></circle></svg
+                ><span
+                  >SLIIT — Sri Lanka Institute of Information Technology</span
+                >
               </div>
             </div>
+            <div>
+              <h4 class="font-display font-bold mb-4">Explore</h4>
+              <ul class="space-y-2 text-sm text-muted-foreground">
+                <li>
+                  <a class="hover:text-primary" href="domain.html"
+                    >Research Domain</a
+                  >
+                </li>
+                <li>
+                  <a class="hover:text-primary" href="milestones.html"
+                    >Milestones</a
+                  >
+                </li>
+                <li>
+                  <a class="hover:text-primary" href="documents.html"
+                    >Documents</a
+                  >
+                </li>
+                <li>
+                  <a class="hover:text-primary" href="architecture.html"
+                    >AI Architecture</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-display font-bold mb-4">Connect</h4>
+              <ul class="space-y-3 text-sm text-muted-foreground">
+                <li class="flex items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-mail w-4 h-4"
+                  >
+                    <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                  </svg>
+                  teratalk.research@sliit.lk
+                </li>
+                <li class="flex items-center gap-3 mt-3">
+                  <a
+                    href="#"
+                    aria-label="GitHub"
+                    class="p-2 rounded-lg hover:bg-primary/10 hover:text-primary"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-github w-4 h-4"
+                    >
+                      <path
+                        d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                      ></path>
+                      <path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a
+                  ><a
+                    href="#"
+                    aria-label="LinkedIn"
+                    class="p-2 rounded-lg hover:bg-primary/10 hover:text-primary"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-linkedin w-4 h-4"
+                    >
+                      <path
+                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                      ></path>
+                      <rect width="4" height="12" x="2" y="9"></rect>
+                      <circle cx="4" cy="4" r="2"></circle></svg
+                  ></a>
+                </li>
+              </ul>
+            </div>
           </div>
-        </section>
-        <section class="container py-12">
-          <p class="text-center text-sm font-semibold text-muted-foreground tracking-wider uppercase mb-6">Built with
-          </p>
-          <div class="flex flex-wrap justify-center items-center gap-4"><span
-              class="px-5 py-2 rounded-full bg-card border border-border font-display font-semibold text-foreground/80 shadow-soft">Flutter</span><span
-              class="px-5 py-2 rounded-full bg-card border border-border font-display font-semibold text-foreground/80 shadow-soft">Supabase</span><span
-              class="px-5 py-2 rounded-full bg-card border border-border font-display font-semibold text-foreground/80 shadow-soft">OpenAI</span><span
-              class="px-5 py-2 rounded-full bg-card border border-border font-display font-semibold text-foreground/80 shadow-soft">Python</span><span
-              class="px-5 py-2 rounded-full bg-card border border-border font-display font-semibold text-foreground/80 shadow-soft">Whisper</span><span
-              class="px-5 py-2 rounded-full bg-card border border-border font-display font-semibold text-foreground/80 shadow-soft">TensorFlow</span>
-          </div>
-        </section>
-        <section class="container py-20">
-          <div class="max-w-3xl mb-12 mx-auto text-center"><span
-              class="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-primary/10 text-primary mb-4">What's
-              Next</span>
-            <h2 class="text-3xl md:text-5xl font-display font-extrabold leading-tight"><span>Future </span><span
-                class="text-gradient">Expansion</span><span></span></h2>
-          </div>
-          <div class="grid md:grid-cols-3 gap-6">
+          <div class="border-t border-border">
             <div
-              class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl border border-dashed border-primary/30 hover:border-primary hover:shadow-soft transition-smooth">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-globe w-8 h-8 text-primary mb-4">
-                <circle cx="12" cy="12" r="10"></circle>
-                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
-                <path d="M2 12h20"></path>
-              </svg>
-              <h3 class="font-display font-bold text-lg mb-2">Sinhala &amp; Tamil Support</h3>
-              <p class="text-sm text-muted-foreground">Native language coverage for Sri Lankan children.</p><svg
-                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-circle-check w-4 h-4 text-primary mt-4 opacity-60">
-                <circle cx="12" cy="12" r="10"></circle>
-                <path d="m9 12 2 2 4-4"></path>
-              </svg>
-            </div>
-            <div
-              class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl border border-dashed border-primary/30 hover:border-primary hover:shadow-soft transition-smooth">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-users w-8 h-8 text-primary mb-4">
-                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-              </svg>
-              <h3 class="font-display font-bold text-lg mb-2">Therapist Marketplace</h3>
-              <p class="text-sm text-muted-foreground">Connect families to verified speech therapists.</p><svg
-                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-circle-check w-4 h-4 text-primary mt-4 opacity-60">
-                <circle cx="12" cy="12" r="10"></circle>
-                <path d="m9 12 2 2 4-4"></path>
-              </svg>
-            </div>
-            <div
-              class="bg-card text-card-foreground shadow-sm p-6 rounded-3xl border border-dashed border-primary/30 hover:border-primary hover:shadow-soft transition-smooth">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-heart w-8 h-8 text-primary mb-4">
-                <path
-                  d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z">
-                </path>
-              </svg>
-              <h3 class="font-display font-bold text-lg mb-2">Global Launch</h3>
-              <p class="text-sm text-muted-foreground">Bring affordable therapy to every child, everywhere.</p><svg
-                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-circle-check w-4 h-4 text-primary mt-4 opacity-60">
-                <circle cx="12" cy="12" r="10"></circle>
-                <path d="m9 12 2 2 4-4"></path>
-              </svg>
+              class="container py-5 text-xs text-muted-foreground flex flex-wrap items-center justify-between gap-2"
+            >
+              <span>© 2026 TeraTalk Research. Final Year Project, SLIIT.</span
+              ><span>Built with care · AI for good</span>
             </div>
           </div>
-        </section>
-        <section class="container pb-20">
-          <div
-            class="relative overflow-hidden rounded-[2rem] gradient-hero p-10 md:p-16 text-center text-white shadow-glow">
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.2),transparent)]">
-            </div>
-            <div class="relative">
-              <h2 class="text-3xl md:text-5xl font-display font-extrabold leading-tight">Ready to see TeraTalk in
-                action?</h2>
-              <p class="mt-4 text-lg text-white/90 max-w-xl mx-auto">Watch the demo, explore the research, or get in
-                touch with the team.</p>
-              <div class="mt-7 flex flex-wrap justify-center gap-3"><a
-                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 rounded-full bg-white text-primary hover:bg-white/90 h-12 px-6"
-                  href="demo.html">Watch Demo</a><a
-                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border hover:text-accent-foreground rounded-full bg-transparent border-white/40 text-white hover:bg-white/10 h-12 px-6"
-                  href="contact.html">Contact the Team</a></div>
-            </div>
-          </div>
-        </section>
-      </main>
-      <footer class="border-t border-border bg-muted/30 mt-20">
-        <div class="container py-14 grid gap-10 md:grid-cols-4">
-          <div class="md:col-span-2"><a class="flex items-center gap-2 font-display font-extrabold text-xl mb-3"
-              href="index.html"><span class="grid place-items-center w-24 h-24 overflow-hidden"><img src="assets/logo.png" alt="TeraTalk Logo" class="w-full h-full object-contain" /></span></a>
-            <p class="text-muted-foreground max-w-md text-sm leading-relaxed">An AI-powered speech therapy platform for
-              children — combining pronunciation analysis, interactive games, and therapist insights to make therapy
-              joyful, accessible, and effective.</p>
-            <div class="flex items-center gap-3 mt-4 text-sm text-muted-foreground"><svg
-                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-map-pin w-4 h-4">
-                <path
-                  d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
-                </path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg><span>SLIIT — Sri Lanka Institute of Information Technology</span></div>
-          </div>
-          <div>
-            <h4 class="font-display font-bold mb-4">Explore</h4>
-            <ul class="space-y-2 text-sm text-muted-foreground">
-              <li><a class="hover:text-primary" href="domain.html">Research Domain</a></li>
-              <li><a class="hover:text-primary" href="milestones.html">Milestones</a></li>
-              <li><a class="hover:text-primary" href="documents.html">Documents</a></li>
-              <li><a class="hover:text-primary" href="architecture.html">AI Architecture</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="font-display font-bold mb-4">Connect</h4>
-            <ul class="space-y-3 text-sm text-muted-foreground">
-              <li class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                  stroke-linejoin="round" class="lucide lucide-mail w-4 h-4">
-                  <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-                </svg> teratalk.research@sliit.lk</li>
-              <li class="flex items-center gap-3 mt-3"><a href="#" aria-label="GitHub"
-                  class="p-2 rounded-lg hover:bg-primary/10 hover:text-primary"><svg xmlns="http://www.w3.org/2000/svg"
-                    width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github w-4 h-4">
-                    <path
-                      d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4">
-                    </path>
-                    <path d="M9 18c-4.51 2-5-2-7-2"></path>
-                  </svg></a><a href="#" aria-label="LinkedIn"
-                  class="p-2 rounded-lg hover:bg-primary/10 hover:text-primary"><svg xmlns="http://www.w3.org/2000/svg"
-                    width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin w-4 h-4">
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                    <rect width="4" height="12" x="2" y="9"></rect>
-                    <circle cx="4" cy="4" r="2"></circle>
-                  </svg></a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="border-t border-border">
-          <div class="container py-5 text-xs text-muted-foreground flex flex-wrap items-center justify-between gap-2">
-            <span>© 2026 TeraTalk Research. Final Year Project, SLIIT.</span><span>Built with care · AI for good</span>
-          </div>
-        </div>
-      </footer>
+        </footer>
+      </div>
     </div>
-  </div>
 
-
-  <script src="script.js" defer=""></script>
-</body>
-
+    <script src="script.js" defer=""></script>
+  </body>
 </html>
